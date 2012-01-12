@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Plantae" Class="PlantaeModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=Plantae;User ID=sa" SettingsObjectName="Plantae.Core.Properties.Settings" SettingsPropertyName="PlantaeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.CONTA" Member="CONTAs">
+    <Type Name="CONTA">
+      <Column Name="ContaID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DataInicial" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SaldoInicial" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

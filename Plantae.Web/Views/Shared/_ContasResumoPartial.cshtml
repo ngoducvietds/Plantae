@@ -1,0 +1,9 @@
+﻿<table>
+<thead><tr><th>Contas @Html.ActionLink("+ nova conta", "Create", "Conta", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaContaLink", data_dialog_title = "nova conta" })</th></tr></thead>
+<tbody>
+@foreach (Plantae.Core.CONTA conta in ViewBag.Contas)
+{
+    <tr><td>@Html.ActionLink(conta.Nome, "Edit", "Conta", routeValues: new { id = conta.ContaID }, htmlAttributes: new { @class = "ajax-link", id = "editarContaLink", data_dialog_title = "editar conta" })</td></tr>
+}
+</tbody>
+</table>
