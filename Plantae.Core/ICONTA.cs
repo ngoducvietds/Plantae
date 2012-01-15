@@ -7,9 +7,9 @@ namespace Plantae.Core
 {
     public interface ICONTA
     {
-        public long ContaId { get; set; }
-        public String Nome { get; set; }
-        public DateTime DataInicial { get; set; }
-        public decimal SaldoInicial { get; set; }
+        long ContaId { get; set; }
+        string Nome { get; set; }
+        DateTime DataInicial { get; set; }
+        decimal SaldoInicial { get; set; }
     }
 }

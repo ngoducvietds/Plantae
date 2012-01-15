@@ -7,12 +7,12 @@ namespace Plantae.Core
 {
     public interface ITRANSACAO
     {
-        public long TransacaoId { get; set; }
-        public JOURNAL Journal { get; set; }
-        public CONTA Conta { get; set; }
-        public CATEGORIA Categoria { get; set; }
-        public string Nome { get; set; }
-        public DateTime Data { get; set; }
-        public decimal Valor { get; set; }
+        long TransacaoId { get; set; }
+        JOURNAL Journal { get; set; }
+        CONTA Conta { get; set; }
+        CATEGORIA Categoria { get; set; }
+        string Nome { get; set; }
+        DateTime Data { get; set; }
+        decimal Valor { get; set; }
     }
 }

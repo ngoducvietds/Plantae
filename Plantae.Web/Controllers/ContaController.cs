@@ -65,7 +65,7 @@ namespace Plantae.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                CONTA conta = new CONTA(model.Nome, model.DataInicial, model.SaldoInicial, User.Identity.Name);
+                CONTA conta = new CONTA(model, User.Identity.Name);
 
                 contaRepository.InsertOnSubmit(conta);
                 contaRepository.Save();

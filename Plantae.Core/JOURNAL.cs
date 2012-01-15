@@ -14,6 +14,10 @@ namespace Plantae.Core
 
         }
 
+        public JOURNAL(IJOURNAL journal, string owner)
+        {
+        }
+
         public JOURNAL(TRANSACAO transacao)
         {
             int tipo;

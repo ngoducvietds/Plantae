@@ -7,9 +7,9 @@ namespace Plantae.Core
 {
     public interface ITRANSFERENCIA
     {
-        public long TransferenciaId { get; set; }
-        public JOURNAL Journal { get; set; }
-        public TRANSACAO Debito { get; set; }
-        public TRANSACAO Credito { get; set; }
+        long TransferenciaId { get; set; }
+        JOURNAL Journal { get; set; }
+        TRANSACAO Debito { get; set; }
+        TRANSACAO Credito { get; set; }
     }
 }

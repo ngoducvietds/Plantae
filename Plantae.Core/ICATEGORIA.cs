@@ -7,7 +7,7 @@ namespace Plantae.Core
 {
     public interface ICATEGORIA
     {
-        public long CategoriaId { get; set; }
-        public string Nome { get; set; }
+        long CategoriaId { get; set; }
+        string Nome { get; set; }
     }
 }

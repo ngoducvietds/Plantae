@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.2.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,20 +71,26 @@
     <Compile Include="Repositories\Disposable.cs" />
     <Compile Include="Repositories\IContaRepository.cs" />
     <Compile Include="Repositories\IContextFactory.cs" />
+    <Compile Include="Repositories\IJournalRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ContextFactory.cs" />
     <Compile Include="Exceptions\OwnerNotSpecifiedException.cs" />
+    <Compile Include="Repositories\ITransacaoRepository.cs" />
+    <Compile Include="Repositories\ITransferenciaRepository.cs" />
+    <Compile Include="Repositories\JournalRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\TransacaoRepository.cs" />
+    <Compile Include="Repositories\TransferenciaRepository.cs" />
+    <Compile Include="Services\JournalServices.cs" />
     <Compile Include="TRANSACAO.cs" />
     <Compile Include="TRANSFERENCIA.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="PlantaeModel.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>PlantaeModel.designer.cs</LastGenOutput>
