@@ -2,11 +2,98 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="PlantaeModel">
   <DataContextMoniker Name="/PlantaeModelDataContext" />
   <nestedChildShapes>
-    <classShape Id="9846ec6f-5e26-4e18-94c8-e5ef632fc32a" absoluteBounds="1.5, 1.375, 2, 1.75354248046875">
-      <DataClassMoniker Name="/PlantaeModelDataContext/CONTA" />
+    <classShape Id="e305d8ed-425d-42e9-bd93-cf2fa107bce6" absoluteBounds="0.75, 1.125, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/PlantaeModelDataContext/CATEGORIA" />
       <nestedChildShapes>
-        <elementListCompartment Id="44e3c48c-e254-44d7-bd25-ba5701c80b0d" absoluteBounds="1.5149999999999997, 1.835, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="490dc6c5-394e-474c-a425-4ec56a21730e" absoluteBounds="0.765, 1.585, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="b042e4d6-5943-4b15-b68e-5529b56cdcd8" absoluteBounds="6.25, 4, 2, 1.7535424804687505">
+      <DataClassMoniker Name="/PlantaeModelDataContext/TRANSFERENCIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f4c3358c-c9f4-40d1-88d1-7883f3d83996" absoluteBounds="6.265, 4.46, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6adab90e-e954-41ec-a7f3-034b77f3a024" absoluteBounds="0.75, 4, 2, 1.7535424804687496">
+      <DataClassMoniker Name="/PlantaeModelDataContext/CONTA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d0f018ac-efec-41fc-a48a-6409b7843655" absoluteBounds="0.765, 4.46, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="184e449c-5990-4736-8941-5da175c80950" absoluteBounds="3.5, 3.25, 2, 3.2326684570312514">
+      <DataClassMoniker Name="/PlantaeModelDataContext/JOURNAL" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bd71dfe5-2324-4961-a33b-845df7d32ded" absoluteBounds="3.515, 3.71, 1.9700000000000002, 2.67266845703125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4073a451-0eae-48a7-bbd9-5e083a356845" absoluteBounds="6.25, 0.75, 2, 2.24658447265625">
+      <DataClassMoniker Name="/PlantaeModelDataContext/TRANSACAO" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3b7c37b7-629e-4895-b8c4-a7f354ed5b24" absoluteBounds="6.265, 1.21, 1.9700000000000002, 1.68658447265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 4.87677124023438); (6.25 : 4.87677124023438)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/JOURNAL/JOURNAL_TRANSFERENCIA" />
+      <nodes>
+        <classShapeMoniker Id="184e449c-5990-4736-8941-5da175c80950" />
+        <classShapeMoniker Id="b042e4d6-5943-4b15-b68e-5529b56cdcd8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.83742390950521); (4.5 : 1.83742390950521); (4.5 : 3.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/CATEGORIA/CATEGORIA_JOURNAL" />
+      <nodes>
+        <classShapeMoniker Id="e305d8ed-425d-42e9-bd93-cf2fa107bce6" />
+        <classShapeMoniker Id="184e449c-5990-4736-8941-5da175c80950" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.87677124023437); (3.5 : 4.87677124023437)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/CONTA/CONTA_JOURNAL" />
+      <nodes>
+        <classShapeMoniker Id="6adab90e-e954-41ec-a7f3-034b77f3a024" />
+        <classShapeMoniker Id="184e449c-5990-4736-8941-5da175c80950" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.37588562011719); (3.5 : 4.37588562011719)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/CONTA/CONTA_JOURNAL1" />
+      <nodes>
+        <classShapeMoniker Id="6adab90e-e954-41ec-a7f3-034b77f3a024" />
+        <classShapeMoniker Id="184e449c-5990-4736-8941-5da175c80950" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.25 : 2.99658447265625); (7.25 : 4)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/TRANSACAO/TRANSACAO_TRANSFERENCIA" />
+      <nodes>
+        <classShapeMoniker Id="4073a451-0eae-48a7-bbd9-5e083a356845" />
+        <classShapeMoniker Id="b042e4d6-5943-4b15-b68e-5529b56cdcd8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.8125 : 2.99658447265625); (7.8125 : 4)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/TRANSACAO/TRANSACAO_TRANSFERENCIA1" />
+      <nodes>
+        <classShapeMoniker Id="4073a451-0eae-48a7-bbd9-5e083a356845" />
+        <classShapeMoniker Id="b042e4d6-5943-4b15-b68e-5529b56cdcd8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.4187119547526); (4.94791916666667 : 1.4187119547526 : JumpStart); (5.11458583333333 : 1.4187119547526 : JumpEnd); (6.25 : 1.4187119547526)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/CATEGORIA/CATEGORIA_TRANSACAO" />
+      <nodes>
+        <classShapeMoniker Id="e305d8ed-425d-42e9-bd93-cf2fa107bce6" />
+        <classShapeMoniker Id="4073a451-0eae-48a7-bbd9-5e083a356845" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.00134787883113); (3.125 : 3.62634787883113); (3.125 : 2.41700369108073); (4.41666666666667 : 2.41700369108073 : JumpStart); (4.58333333333333 : 2.41700369108073 : JumpEnd); (4.94791916666667 : 2.41700369108073 : JumpStart); (5.11458583333333 : 2.41700369108073 : JumpEnd); (6.25 : 2.41700369108073)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/CONTA/CONTA_TRANSACAO" />
+      <nodes>
+        <classShapeMoniker Id="6adab90e-e954-41ec-a7f3-034b77f3a024" />
+        <classShapeMoniker Id="4073a451-0eae-48a7-bbd9-5e083a356845" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.0312525 : 3.25); (5.0312525 : 1.0531034773763); (6.25 : 1.0531034773763)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PlantaeModelDataContext/JOURNAL/JOURNAL_TRANSACAO" />
+      <nodes>
+        <classShapeMoniker Id="184e449c-5990-4736-8941-5da175c80950" />
+        <classShapeMoniker Id="4073a451-0eae-48a7-bbd9-5e083a356845" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

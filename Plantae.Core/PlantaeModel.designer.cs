@@ -30,9 +30,21 @@ namespace Plantae.Core
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertCATEGORIA(CATEGORIA instance);
+    partial void UpdateCATEGORIA(CATEGORIA instance);
+    partial void DeleteCATEGORIA(CATEGORIA instance);
+    partial void InsertTRANSFERENCIA(TRANSFERENCIA instance);
+    partial void UpdateTRANSFERENCIA(TRANSFERENCIA instance);
+    partial void DeleteTRANSFERENCIA(TRANSFERENCIA instance);
     partial void InsertCONTA(CONTA instance);
     partial void UpdateCONTA(CONTA instance);
     partial void DeleteCONTA(CONTA instance);
+    partial void InsertJOURNAL(JOURNAL instance);
+    partial void UpdateJOURNAL(JOURNAL instance);
+    partial void DeleteJOURNAL(JOURNAL instance);
+    partial void InsertTRANSACAO(TRANSACAO instance);
+    partial void UpdateTRANSACAO(TRANSACAO instance);
+    partial void DeleteTRANSACAO(TRANSACAO instance);
     #endregion
 		
 		public PlantaeModelDataContext() : 
@@ -65,11 +77,538 @@ namespace Plantae.Core
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<CATEGORIA> CATEGORIAs
+		{
+			get
+			{
+				return this.GetTable<CATEGORIA>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TRANSFERENCIA> TRANSFERENCIAs
+		{
+			get
+			{
+				return this.GetTable<TRANSFERENCIA>();
+			}
+		}
+		
 		public System.Data.Linq.Table<CONTA> CONTAs
 		{
 			get
 			{
 				return this.GetTable<CONTA>();
+			}
+		}
+		
+		public System.Data.Linq.Table<JOURNAL> JOURNALs
+		{
+			get
+			{
+				return this.GetTable<JOURNAL>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TRANSACAO> TRANSACAOs
+		{
+			get
+			{
+				return this.GetTable<TRANSACAO>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CATEGORIA")]
+	public partial class CATEGORIA : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _CategoriaID;
+		
+		private string _Nome;
+		
+		private string _Owner;
+		
+		private System.Guid _Guid;
+		
+		private EntitySet<JOURNAL> _JOURNALS;
+		
+		private EntitySet<TRANSACAO> _TRANSACOES;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCategoriaIDChanging(long value);
+    partial void OnCategoriaIDChanged();
+    partial void OnNomeChanging(string value);
+    partial void OnNomeChanged();
+    partial void OnOwnerChanging(string value);
+    partial void OnOwnerChanged();
+    partial void OnGuidChanging(System.Guid value);
+    partial void OnGuidChanged();
+    #endregion
+		
+		public CATEGORIA()
+		{
+			this._JOURNALS = new EntitySet<JOURNAL>(new Action<JOURNAL>(this.attach_JOURNALS), new Action<JOURNAL>(this.detach_JOURNALS));
+			this._TRANSACOES = new EntitySet<TRANSACAO>(new Action<TRANSACAO>(this.attach_TRANSACOES), new Action<TRANSACAO>(this.detach_TRANSACOES));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoriaID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long CategoriaID
+		{
+			get
+			{
+				return this._CategoriaID;
+			}
+			set
+			{
+				if ((this._CategoriaID != value))
+				{
+					this.OnCategoriaIDChanging(value);
+					this.SendPropertyChanging();
+					this._CategoriaID = value;
+					this.SendPropertyChanged("CategoriaID");
+					this.OnCategoriaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nome", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nome
+		{
+			get
+			{
+				return this._Nome;
+			}
+			set
+			{
+				if ((this._Nome != value))
+				{
+					this.OnNomeChanging(value);
+					this.SendPropertyChanging();
+					this._Nome = value;
+					this.SendPropertyChanged("Nome");
+					this.OnNomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Owner", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Owner
+		{
+			get
+			{
+				return this._Owner;
+			}
+			set
+			{
+				if ((this._Owner != value))
+				{
+					this.OnOwnerChanging(value);
+					this.SendPropertyChanging();
+					this._Owner = value;
+					this.SendPropertyChanged("Owner");
+					this.OnOwnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Guid", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsDbGenerated=true)]
+		public System.Guid Guid
+		{
+			get
+			{
+				return this._Guid;
+			}
+			set
+			{
+				if ((this._Guid != value))
+				{
+					this.OnGuidChanging(value);
+					this.SendPropertyChanging();
+					this._Guid = value;
+					this.SendPropertyChanged("Guid");
+					this.OnGuidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_JOURNALS", ThisKey="CategoriaID", OtherKey="Categoria")]
+		public EntitySet<JOURNAL> JOURNALS
+		{
+			get
+			{
+				return this._JOURNALS;
+			}
+			set
+			{
+				this._JOURNALS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_TRANSACOES", ThisKey="CategoriaID", OtherKey="Categoria")]
+		public EntitySet<TRANSACAO> TRANSACOES
+		{
+			get
+			{
+				return this._TRANSACOES;
+			}
+			set
+			{
+				this._TRANSACOES.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_JOURNALS(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CATEGORIA = this;
+		}
+		
+		private void detach_JOURNALS(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CATEGORIA = null;
+		}
+		
+		private void attach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CATEGORIA = this;
+		}
+		
+		private void detach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CATEGORIA = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRANSFERENCIA")]
+	public partial class TRANSFERENCIA : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _TransferenciaID;
+		
+		private long _Journal;
+		
+		private long _Debito;
+		
+		private long _Credito;
+		
+		private string _Owner;
+		
+		private System.Guid _Guid;
+		
+		private EntityRef<JOURNAL> _JOURNAL;
+		
+		private EntityRef<TRANSACAO> _TRANSACAOCREDITO;
+		
+		private EntityRef<TRANSACAO> _TRANSACAODEBITO;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTransferenciaIDChanging(long value);
+    partial void OnTransferenciaIDChanged();
+    partial void OnJournalChanging(long value);
+    partial void OnJournalChanged();
+    partial void OnDebitoChanging(long value);
+    partial void OnDebitoChanged();
+    partial void OnCreditoChanging(long value);
+    partial void OnCreditoChanged();
+    partial void OnOwnerChanging(string value);
+    partial void OnOwnerChanged();
+    partial void OnGuidChanging(System.Guid value);
+    partial void OnGuidChanged();
+    #endregion
+		
+		public TRANSFERENCIA()
+		{
+			this._JOURNAL = default(EntityRef<JOURNAL>);
+			this._TRANSACAOCREDITO = default(EntityRef<TRANSACAO>);
+			this._TRANSACAODEBITO = default(EntityRef<TRANSACAO>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransferenciaID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long TransferenciaID
+		{
+			get
+			{
+				return this._TransferenciaID;
+			}
+			set
+			{
+				if ((this._TransferenciaID != value))
+				{
+					this.OnTransferenciaIDChanging(value);
+					this.SendPropertyChanging();
+					this._TransferenciaID = value;
+					this.SendPropertyChanged("TransferenciaID");
+					this.OnTransferenciaIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Journal", DbType="BigInt NOT NULL")]
+		public long Journal
+		{
+			get
+			{
+				return this._Journal;
+			}
+			set
+			{
+				if ((this._Journal != value))
+				{
+					if (this._JOURNAL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnJournalChanging(value);
+					this.SendPropertyChanging();
+					this._Journal = value;
+					this.SendPropertyChanged("Journal");
+					this.OnJournalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Debito", DbType="BigInt NOT NULL")]
+		public long Debito
+		{
+			get
+			{
+				return this._Debito;
+			}
+			set
+			{
+				if ((this._Debito != value))
+				{
+					if (this._TRANSACAODEBITO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDebitoChanging(value);
+					this.SendPropertyChanging();
+					this._Debito = value;
+					this.SendPropertyChanged("Debito");
+					this.OnDebitoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Credito", DbType="BigInt NOT NULL")]
+		public long Credito
+		{
+			get
+			{
+				return this._Credito;
+			}
+			set
+			{
+				if ((this._Credito != value))
+				{
+					if (this._TRANSACAOCREDITO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCreditoChanging(value);
+					this.SendPropertyChanging();
+					this._Credito = value;
+					this.SendPropertyChanged("Credito");
+					this.OnCreditoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Owner", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Owner
+		{
+			get
+			{
+				return this._Owner;
+			}
+			set
+			{
+				if ((this._Owner != value))
+				{
+					this.OnOwnerChanging(value);
+					this.SendPropertyChanging();
+					this._Owner = value;
+					this.SendPropertyChanged("Owner");
+					this.OnOwnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Guid", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsDbGenerated=true)]
+		public System.Guid Guid
+		{
+			get
+			{
+				return this._Guid;
+			}
+			set
+			{
+				if ((this._Guid != value))
+				{
+					this.OnGuidChanging(value);
+					this.SendPropertyChanging();
+					this._Guid = value;
+					this.SendPropertyChanged("Guid");
+					this.OnGuidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_JOURNAL", ThisKey="Journal", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public JOURNAL JOURNAL
+		{
+			get
+			{
+				return this._JOURNAL.Entity;
+			}
+			set
+			{
+				JOURNAL previousValue = this._JOURNAL.Entity;
+				if (((previousValue != value) 
+							|| (this._JOURNAL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._JOURNAL.Entity = null;
+						previousValue.TRANSFERENCIAS.Remove(this);
+					}
+					this._JOURNAL.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSFERENCIAS.Add(this);
+						this._Journal = value.JournalID;
+					}
+					else
+					{
+						this._Journal = default(long);
+					}
+					this.SendPropertyChanged("JOURNAL");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_TRANSACAOCREDITO", ThisKey="Credito", OtherKey="TransacaoID", IsForeignKey=true)]
+		public TRANSACAO TRANSACAOCREDITO
+		{
+			get
+			{
+				return this._TRANSACAOCREDITO.Entity;
+			}
+			set
+			{
+				TRANSACAO previousValue = this._TRANSACAOCREDITO.Entity;
+				if (((previousValue != value) 
+							|| (this._TRANSACAOCREDITO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TRANSACAOCREDITO.Entity = null;
+						previousValue.TRANSFERENCIASCREDITO.Remove(this);
+					}
+					this._TRANSACAOCREDITO.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSFERENCIASCREDITO.Add(this);
+						this._Credito = value.TransacaoID;
+					}
+					else
+					{
+						this._Credito = default(long);
+					}
+					this.SendPropertyChanged("TRANSACAOCREDITO");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_TRANSACAODEBITO", ThisKey="Debito", OtherKey="TransacaoID", IsForeignKey=true)]
+		public TRANSACAO TRANSACAODEBITO
+		{
+			get
+			{
+				return this._TRANSACAODEBITO.Entity;
+			}
+			set
+			{
+				TRANSACAO previousValue = this._TRANSACAODEBITO.Entity;
+				if (((previousValue != value) 
+							|| (this._TRANSACAODEBITO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TRANSACAODEBITO.Entity = null;
+						previousValue.TRANSFERENCIASDEBITO.Remove(this);
+					}
+					this._TRANSACAODEBITO.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSFERENCIASDEBITO.Add(this);
+						this._Debito = value.TransacaoID;
+					}
+					else
+					{
+						this._Debito = default(long);
+					}
+					this.SendPropertyChanged("TRANSACAODEBITO");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -92,6 +631,12 @@ namespace Plantae.Core
 		
 		private System.Guid _Guid;
 		
+		private EntitySet<JOURNAL> _JOURNALSCREDITO;
+		
+		private EntitySet<JOURNAL> _JOURNALSDEBITO;
+		
+		private EntitySet<TRANSACAO> _TRANSACOES;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -112,6 +657,9 @@ namespace Plantae.Core
 		
 		public CONTA()
 		{
+			this._JOURNALSCREDITO = new EntitySet<JOURNAL>(new Action<JOURNAL>(this.attach_JOURNALSCREDITO), new Action<JOURNAL>(this.detach_JOURNALSCREDITO));
+			this._JOURNALSDEBITO = new EntitySet<JOURNAL>(new Action<JOURNAL>(this.attach_JOURNALSDEBITO), new Action<JOURNAL>(this.detach_JOURNALSDEBITO));
+			this._TRANSACOES = new EntitySet<TRANSACAO>(new Action<TRANSACAO>(this.attach_TRANSACOES), new Action<TRANSACAO>(this.detach_TRANSACOES));
 			OnCreated();
 		}
 		
@@ -235,6 +783,45 @@ namespace Plantae.Core
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_JOURNALSCREDITO", ThisKey="ContaID", OtherKey="ContaCredito")]
+		public EntitySet<JOURNAL> JOURNALSCREDITO
+		{
+			get
+			{
+				return this._JOURNALSCREDITO;
+			}
+			set
+			{
+				this._JOURNALSCREDITO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_JOURNALSDEBITO", ThisKey="ContaID", OtherKey="ContaDebito")]
+		public EntitySet<JOURNAL> JOURNALSDEBITO
+		{
+			get
+			{
+				return this._JOURNALSDEBITO;
+			}
+			set
+			{
+				this._JOURNALSDEBITO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_TRANSACOES", ThisKey="ContaID", OtherKey="Conta")]
+		public EntitySet<TRANSACAO> TRANSACOES
+		{
+			get
+			{
+				return this._TRANSACOES;
+			}
+			set
+			{
+				this._TRANSACOES.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -253,6 +840,1052 @@ namespace Plantae.Core
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_JOURNALSCREDITO(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTACREDITO = this;
+		}
+		
+		private void detach_JOURNALSCREDITO(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTACREDITO = null;
+		}
+		
+		private void attach_JOURNALSDEBITO(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTADEBITO = this;
+		}
+		
+		private void detach_JOURNALSDEBITO(JOURNAL entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTADEBITO = null;
+		}
+		
+		private void attach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTA = this;
+		}
+		
+		private void detach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.CONTA = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.JOURNAL")]
+	public partial class JOURNAL : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _JournalID;
+		
+		private int _TipoTransacao;
+		
+		private System.Nullable<long> _ContaDebito;
+		
+		private System.Nullable<long> _ContaCredito;
+		
+		private long _Categoria;
+		
+		private string _Nome;
+		
+		private System.DateTime _Data;
+		
+		private decimal _Valor;
+		
+		private int _Periodicidade;
+		
+		private int _ParcelaInicial;
+		
+		private int _ParcelaTotal;
+		
+		private bool _TempoIndeterminado;
+		
+		private System.DateTime _UltimaAtualizacao;
+		
+		private string _Owner;
+		
+		private System.Guid _Guid;
+		
+		private EntitySet<TRANSFERENCIA> _TRANSFERENCIAS;
+		
+		private EntitySet<TRANSACAO> _TRANSACOES;
+		
+		private EntityRef<CATEGORIA> _CATEGORIA;
+		
+		private EntityRef<CONTA> _CONTACREDITO;
+		
+		private EntityRef<CONTA> _CONTADEBITO;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnJournalIDChanging(long value);
+    partial void OnJournalIDChanged();
+    partial void OnTipoTransacaoChanging(int value);
+    partial void OnTipoTransacaoChanged();
+    partial void OnContaDebitoChanging(System.Nullable<long> value);
+    partial void OnContaDebitoChanged();
+    partial void OnContaCreditoChanging(System.Nullable<long> value);
+    partial void OnContaCreditoChanged();
+    partial void OnCategoriaChanging(long value);
+    partial void OnCategoriaChanged();
+    partial void OnNomeChanging(string value);
+    partial void OnNomeChanged();
+    partial void OnDataChanging(System.DateTime value);
+    partial void OnDataChanged();
+    partial void OnValorChanging(decimal value);
+    partial void OnValorChanged();
+    partial void OnPeriodicidadeChanging(int value);
+    partial void OnPeriodicidadeChanged();
+    partial void OnParcelaInicialChanging(int value);
+    partial void OnParcelaInicialChanged();
+    partial void OnParcelaTotalChanging(int value);
+    partial void OnParcelaTotalChanged();
+    partial void OnTempoIndeterminadoChanging(bool value);
+    partial void OnTempoIndeterminadoChanged();
+    partial void OnUltimaAtualizacaoChanging(System.DateTime value);
+    partial void OnUltimaAtualizacaoChanged();
+    partial void OnOwnerChanging(string value);
+    partial void OnOwnerChanged();
+    partial void OnGuidChanging(System.Guid value);
+    partial void OnGuidChanged();
+    #endregion
+		
+		public JOURNAL()
+		{
+			this._TRANSFERENCIAS = new EntitySet<TRANSFERENCIA>(new Action<TRANSFERENCIA>(this.attach_TRANSFERENCIAS), new Action<TRANSFERENCIA>(this.detach_TRANSFERENCIAS));
+			this._TRANSACOES = new EntitySet<TRANSACAO>(new Action<TRANSACAO>(this.attach_TRANSACOES), new Action<TRANSACAO>(this.detach_TRANSACOES));
+			this._CATEGORIA = default(EntityRef<CATEGORIA>);
+			this._CONTACREDITO = default(EntityRef<CONTA>);
+			this._CONTADEBITO = default(EntityRef<CONTA>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JournalID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long JournalID
+		{
+			get
+			{
+				return this._JournalID;
+			}
+			set
+			{
+				if ((this._JournalID != value))
+				{
+					this.OnJournalIDChanging(value);
+					this.SendPropertyChanging();
+					this._JournalID = value;
+					this.SendPropertyChanged("JournalID");
+					this.OnJournalIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TipoTransacao", DbType="Int NOT NULL")]
+		public int TipoTransacao
+		{
+			get
+			{
+				return this._TipoTransacao;
+			}
+			set
+			{
+				if ((this._TipoTransacao != value))
+				{
+					this.OnTipoTransacaoChanging(value);
+					this.SendPropertyChanging();
+					this._TipoTransacao = value;
+					this.SendPropertyChanged("TipoTransacao");
+					this.OnTipoTransacaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaDebito", DbType="BigInt")]
+		public System.Nullable<long> ContaDebito
+		{
+			get
+			{
+				return this._ContaDebito;
+			}
+			set
+			{
+				if ((this._ContaDebito != value))
+				{
+					if (this._CONTADEBITO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContaDebitoChanging(value);
+					this.SendPropertyChanging();
+					this._ContaDebito = value;
+					this.SendPropertyChanged("ContaDebito");
+					this.OnContaDebitoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaCredito", DbType="BigInt")]
+		public System.Nullable<long> ContaCredito
+		{
+			get
+			{
+				return this._ContaCredito;
+			}
+			set
+			{
+				if ((this._ContaCredito != value))
+				{
+					if (this._CONTACREDITO.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContaCreditoChanging(value);
+					this.SendPropertyChanging();
+					this._ContaCredito = value;
+					this.SendPropertyChanged("ContaCredito");
+					this.OnContaCreditoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="BigInt NOT NULL")]
+		public long Categoria
+		{
+			get
+			{
+				return this._Categoria;
+			}
+			set
+			{
+				if ((this._Categoria != value))
+				{
+					if (this._CATEGORIA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoriaChanging(value);
+					this.SendPropertyChanging();
+					this._Categoria = value;
+					this.SendPropertyChanged("Categoria");
+					this.OnCategoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nome", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nome
+		{
+			get
+			{
+				return this._Nome;
+			}
+			set
+			{
+				if ((this._Nome != value))
+				{
+					this.OnNomeChanging(value);
+					this.SendPropertyChanging();
+					this._Nome = value;
+					this.SendPropertyChanged("Nome");
+					this.OnNomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="Date NOT NULL")]
+		public System.DateTime Data
+		{
+			get
+			{
+				return this._Data;
+			}
+			set
+			{
+				if ((this._Data != value))
+				{
+					this.OnDataChanging(value);
+					this.SendPropertyChanging();
+					this._Data = value;
+					this.SendPropertyChanged("Data");
+					this.OnDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,0) NOT NULL")]
+		public decimal Valor
+		{
+			get
+			{
+				return this._Valor;
+			}
+			set
+			{
+				if ((this._Valor != value))
+				{
+					this.OnValorChanging(value);
+					this.SendPropertyChanging();
+					this._Valor = value;
+					this.SendPropertyChanged("Valor");
+					this.OnValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Periodicidade", DbType="Int NOT NULL")]
+		public int Periodicidade
+		{
+			get
+			{
+				return this._Periodicidade;
+			}
+			set
+			{
+				if ((this._Periodicidade != value))
+				{
+					this.OnPeriodicidadeChanging(value);
+					this.SendPropertyChanging();
+					this._Periodicidade = value;
+					this.SendPropertyChanged("Periodicidade");
+					this.OnPeriodicidadeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParcelaInicial", DbType="Int NOT NULL")]
+		public int ParcelaInicial
+		{
+			get
+			{
+				return this._ParcelaInicial;
+			}
+			set
+			{
+				if ((this._ParcelaInicial != value))
+				{
+					this.OnParcelaInicialChanging(value);
+					this.SendPropertyChanging();
+					this._ParcelaInicial = value;
+					this.SendPropertyChanged("ParcelaInicial");
+					this.OnParcelaInicialChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ParcelaTotal", DbType="Int NOT NULL")]
+		public int ParcelaTotal
+		{
+			get
+			{
+				return this._ParcelaTotal;
+			}
+			set
+			{
+				if ((this._ParcelaTotal != value))
+				{
+					this.OnParcelaTotalChanging(value);
+					this.SendPropertyChanging();
+					this._ParcelaTotal = value;
+					this.SendPropertyChanged("ParcelaTotal");
+					this.OnParcelaTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TempoIndeterminado", DbType="Bit NOT NULL")]
+		public bool TempoIndeterminado
+		{
+			get
+			{
+				return this._TempoIndeterminado;
+			}
+			set
+			{
+				if ((this._TempoIndeterminado != value))
+				{
+					this.OnTempoIndeterminadoChanging(value);
+					this.SendPropertyChanging();
+					this._TempoIndeterminado = value;
+					this.SendPropertyChanged("TempoIndeterminado");
+					this.OnTempoIndeterminadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UltimaAtualizacao", DbType="Date NOT NULL")]
+		public System.DateTime UltimaAtualizacao
+		{
+			get
+			{
+				return this._UltimaAtualizacao;
+			}
+			set
+			{
+				if ((this._UltimaAtualizacao != value))
+				{
+					this.OnUltimaAtualizacaoChanging(value);
+					this.SendPropertyChanging();
+					this._UltimaAtualizacao = value;
+					this.SendPropertyChanged("UltimaAtualizacao");
+					this.OnUltimaAtualizacaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Owner", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Owner
+		{
+			get
+			{
+				return this._Owner;
+			}
+			set
+			{
+				if ((this._Owner != value))
+				{
+					this.OnOwnerChanging(value);
+					this.SendPropertyChanging();
+					this._Owner = value;
+					this.SendPropertyChanged("Owner");
+					this.OnOwnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Guid", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsDbGenerated=true)]
+		public System.Guid Guid
+		{
+			get
+			{
+				return this._Guid;
+			}
+			set
+			{
+				if ((this._Guid != value))
+				{
+					this.OnGuidChanging(value);
+					this.SendPropertyChanging();
+					this._Guid = value;
+					this.SendPropertyChanged("Guid");
+					this.OnGuidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_TRANSFERENCIAS", ThisKey="JournalID", OtherKey="Journal")]
+		public EntitySet<TRANSFERENCIA> TRANSFERENCIAS
+		{
+			get
+			{
+				return this._TRANSFERENCIAS;
+			}
+			set
+			{
+				this._TRANSFERENCIAS.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_TRANSACOES", ThisKey="JournalID", OtherKey="Journal")]
+		public EntitySet<TRANSACAO> TRANSACOES
+		{
+			get
+			{
+				return this._TRANSACOES;
+			}
+			set
+			{
+				this._TRANSACOES.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_CATEGORIA", ThisKey="Categoria", OtherKey="CategoriaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public CATEGORIA CATEGORIA
+		{
+			get
+			{
+				return this._CATEGORIA.Entity;
+			}
+			set
+			{
+				CATEGORIA previousValue = this._CATEGORIA.Entity;
+				if (((previousValue != value) 
+							|| (this._CATEGORIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CATEGORIA.Entity = null;
+						previousValue.JOURNALS.Remove(this);
+					}
+					this._CATEGORIA.Entity = value;
+					if ((value != null))
+					{
+						value.JOURNALS.Add(this);
+						this._Categoria = value.CategoriaID;
+					}
+					else
+					{
+						this._Categoria = default(long);
+					}
+					this.SendPropertyChanged("CATEGORIA");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_CONTACREDITO", ThisKey="ContaCredito", OtherKey="ContaID", IsForeignKey=true)]
+		public CONTA CONTACREDITO
+		{
+			get
+			{
+				return this._CONTACREDITO.Entity;
+			}
+			set
+			{
+				CONTA previousValue = this._CONTACREDITO.Entity;
+				if (((previousValue != value) 
+							|| (this._CONTACREDITO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CONTACREDITO.Entity = null;
+						previousValue.JOURNALSCREDITO.Remove(this);
+					}
+					this._CONTACREDITO.Entity = value;
+					if ((value != null))
+					{
+						value.JOURNALSCREDITO.Add(this);
+						this._ContaCredito = value.ContaID;
+					}
+					else
+					{
+						this._ContaCredito = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("CONTACREDITO");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_CONTADEBITO", ThisKey="ContaDebito", OtherKey="ContaID", IsForeignKey=true)]
+		public CONTA CONTADEBITO
+		{
+			get
+			{
+				return this._CONTADEBITO.Entity;
+			}
+			set
+			{
+				CONTA previousValue = this._CONTADEBITO.Entity;
+				if (((previousValue != value) 
+							|| (this._CONTADEBITO.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CONTADEBITO.Entity = null;
+						previousValue.JOURNALSDEBITO.Remove(this);
+					}
+					this._CONTADEBITO.Entity = value;
+					if ((value != null))
+					{
+						value.JOURNALSDEBITO.Add(this);
+						this._ContaDebito = value.ContaID;
+					}
+					else
+					{
+						this._ContaDebito = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("CONTADEBITO");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TRANSFERENCIAS(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.JOURNAL = this;
+		}
+		
+		private void detach_TRANSFERENCIAS(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.JOURNAL = null;
+		}
+		
+		private void attach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.JOURNAL = this;
+		}
+		
+		private void detach_TRANSACOES(TRANSACAO entity)
+		{
+			this.SendPropertyChanging();
+			entity.JOURNAL = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TRANSACAO")]
+	public partial class TRANSACAO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _TransacaoID;
+		
+		private long _Journal;
+		
+		private long _Conta;
+		
+		private long _Categoria;
+		
+		private string _Nome;
+		
+		private System.DateTime _Data;
+		
+		private decimal _Valor;
+		
+		private string _Owner;
+		
+		private System.Guid _Guid;
+		
+		private EntitySet<TRANSFERENCIA> _TRANSFERENCIASCREDITO;
+		
+		private EntitySet<TRANSFERENCIA> _TRANSFERENCIASDEBITO;
+		
+		private EntityRef<CATEGORIA> _CATEGORIA;
+		
+		private EntityRef<CONTA> _CONTA;
+		
+		private EntityRef<JOURNAL> _JOURNAL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTransacaoIDChanging(long value);
+    partial void OnTransacaoIDChanged();
+    partial void OnJournalChanging(long value);
+    partial void OnJournalChanged();
+    partial void OnContaChanging(long value);
+    partial void OnContaChanged();
+    partial void OnCategoriaChanging(long value);
+    partial void OnCategoriaChanged();
+    partial void OnNomeChanging(string value);
+    partial void OnNomeChanged();
+    partial void OnDataChanging(System.DateTime value);
+    partial void OnDataChanged();
+    partial void OnValorChanging(decimal value);
+    partial void OnValorChanged();
+    partial void OnOwnerChanging(string value);
+    partial void OnOwnerChanged();
+    partial void OnGuidChanging(System.Guid value);
+    partial void OnGuidChanged();
+    #endregion
+		
+		public TRANSACAO()
+		{
+			this._TRANSFERENCIASCREDITO = new EntitySet<TRANSFERENCIA>(new Action<TRANSFERENCIA>(this.attach_TRANSFERENCIASCREDITO), new Action<TRANSFERENCIA>(this.detach_TRANSFERENCIASCREDITO));
+			this._TRANSFERENCIASDEBITO = new EntitySet<TRANSFERENCIA>(new Action<TRANSFERENCIA>(this.attach_TRANSFERENCIASDEBITO), new Action<TRANSFERENCIA>(this.detach_TRANSFERENCIASDEBITO));
+			this._CATEGORIA = default(EntityRef<CATEGORIA>);
+			this._CONTA = default(EntityRef<CONTA>);
+			this._JOURNAL = default(EntityRef<JOURNAL>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransacaoID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long TransacaoID
+		{
+			get
+			{
+				return this._TransacaoID;
+			}
+			set
+			{
+				if ((this._TransacaoID != value))
+				{
+					this.OnTransacaoIDChanging(value);
+					this.SendPropertyChanging();
+					this._TransacaoID = value;
+					this.SendPropertyChanged("TransacaoID");
+					this.OnTransacaoIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Journal", DbType="BigInt NOT NULL")]
+		public long Journal
+		{
+			get
+			{
+				return this._Journal;
+			}
+			set
+			{
+				if ((this._Journal != value))
+				{
+					if (this._JOURNAL.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnJournalChanging(value);
+					this.SendPropertyChanging();
+					this._Journal = value;
+					this.SendPropertyChanged("Journal");
+					this.OnJournalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Conta", DbType="BigInt NOT NULL")]
+		public long Conta
+		{
+			get
+			{
+				return this._Conta;
+			}
+			set
+			{
+				if ((this._Conta != value))
+				{
+					if (this._CONTA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContaChanging(value);
+					this.SendPropertyChanging();
+					this._Conta = value;
+					this.SendPropertyChanged("Conta");
+					this.OnContaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="BigInt NOT NULL")]
+		public long Categoria
+		{
+			get
+			{
+				return this._Categoria;
+			}
+			set
+			{
+				if ((this._Categoria != value))
+				{
+					if (this._CATEGORIA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCategoriaChanging(value);
+					this.SendPropertyChanging();
+					this._Categoria = value;
+					this.SendPropertyChanged("Categoria");
+					this.OnCategoriaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nome", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nome
+		{
+			get
+			{
+				return this._Nome;
+			}
+			set
+			{
+				if ((this._Nome != value))
+				{
+					this.OnNomeChanging(value);
+					this.SendPropertyChanging();
+					this._Nome = value;
+					this.SendPropertyChanged("Nome");
+					this.OnNomeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="Date NOT NULL")]
+		public System.DateTime Data
+		{
+			get
+			{
+				return this._Data;
+			}
+			set
+			{
+				if ((this._Data != value))
+				{
+					this.OnDataChanging(value);
+					this.SendPropertyChanging();
+					this._Data = value;
+					this.SendPropertyChanged("Data");
+					this.OnDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,0) NOT NULL")]
+		public decimal Valor
+		{
+			get
+			{
+				return this._Valor;
+			}
+			set
+			{
+				if ((this._Valor != value))
+				{
+					this.OnValorChanging(value);
+					this.SendPropertyChanging();
+					this._Valor = value;
+					this.SendPropertyChanged("Valor");
+					this.OnValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Owner", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Owner
+		{
+			get
+			{
+				return this._Owner;
+			}
+			set
+			{
+				if ((this._Owner != value))
+				{
+					this.OnOwnerChanging(value);
+					this.SendPropertyChanging();
+					this._Owner = value;
+					this.SendPropertyChanged("Owner");
+					this.OnOwnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Guid", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsDbGenerated=true)]
+		public System.Guid Guid
+		{
+			get
+			{
+				return this._Guid;
+			}
+			set
+			{
+				if ((this._Guid != value))
+				{
+					this.OnGuidChanging(value);
+					this.SendPropertyChanging();
+					this._Guid = value;
+					this.SendPropertyChanged("Guid");
+					this.OnGuidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_TRANSFERENCIASCREDITO", ThisKey="TransacaoID", OtherKey="Credito")]
+		public EntitySet<TRANSFERENCIA> TRANSFERENCIASCREDITO
+		{
+			get
+			{
+				return this._TRANSFERENCIASCREDITO;
+			}
+			set
+			{
+				this._TRANSFERENCIASCREDITO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_TRANSFERENCIASDEBITO", ThisKey="TransacaoID", OtherKey="Debito")]
+		public EntitySet<TRANSFERENCIA> TRANSFERENCIASDEBITO
+		{
+			get
+			{
+				return this._TRANSFERENCIASDEBITO;
+			}
+			set
+			{
+				this._TRANSFERENCIASDEBITO.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_CATEGORIA", ThisKey="Categoria", OtherKey="CategoriaID", IsForeignKey=true)]
+		public CATEGORIA CATEGORIA
+		{
+			get
+			{
+				return this._CATEGORIA.Entity;
+			}
+			set
+			{
+				CATEGORIA previousValue = this._CATEGORIA.Entity;
+				if (((previousValue != value) 
+							|| (this._CATEGORIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CATEGORIA.Entity = null;
+						previousValue.TRANSACOES.Remove(this);
+					}
+					this._CATEGORIA.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSACOES.Add(this);
+						this._Categoria = value.CategoriaID;
+					}
+					else
+					{
+						this._Categoria = default(long);
+					}
+					this.SendPropertyChanged("CATEGORIA");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_CONTA", ThisKey="Conta", OtherKey="ContaID", IsForeignKey=true)]
+		public CONTA CONTA
+		{
+			get
+			{
+				return this._CONTA.Entity;
+			}
+			set
+			{
+				CONTA previousValue = this._CONTA.Entity;
+				if (((previousValue != value) 
+							|| (this._CONTA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._CONTA.Entity = null;
+						previousValue.TRANSACOES.Remove(this);
+					}
+					this._CONTA.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSACOES.Add(this);
+						this._Conta = value.ContaID;
+					}
+					else
+					{
+						this._Conta = default(long);
+					}
+					this.SendPropertyChanged("CONTA");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_JOURNAL", ThisKey="Journal", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public JOURNAL JOURNAL
+		{
+			get
+			{
+				return this._JOURNAL.Entity;
+			}
+			set
+			{
+				JOURNAL previousValue = this._JOURNAL.Entity;
+				if (((previousValue != value) 
+							|| (this._JOURNAL.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._JOURNAL.Entity = null;
+						previousValue.TRANSACOES.Remove(this);
+					}
+					this._JOURNAL.Entity = value;
+					if ((value != null))
+					{
+						value.TRANSACOES.Add(this);
+						this._Journal = value.JournalID;
+					}
+					else
+					{
+						this._Journal = default(long);
+					}
+					this.SendPropertyChanged("JOURNAL");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_TRANSFERENCIASCREDITO(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANSACAOCREDITO = this;
+		}
+		
+		private void detach_TRANSFERENCIASCREDITO(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANSACAOCREDITO = null;
+		}
+		
+		private void attach_TRANSFERENCIASDEBITO(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANSACAODEBITO = this;
+		}
+		
+		private void detach_TRANSFERENCIASDEBITO(TRANSFERENCIA entity)
+		{
+			this.SendPropertyChanging();
+			entity.TRANSACAODEBITO = null;
 		}
 	}
 }

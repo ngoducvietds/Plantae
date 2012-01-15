@@ -7,7 +7,7 @@ using Plantae.Core;
 
 namespace Plantae.Web.Models
 {
-    public class ContaModel
+    public class ContaModel : ICONTA
     {
         public ContaModel(CONTA conta)
         {
@@ -24,13 +24,13 @@ namespace Plantae.Web.Models
         [Key, ScaffoldColumn(false)]
         public long ContaId { get; set; }
 
-        [Required]
+        [Required, Display(Name="nome da conta")]
         public String Nome { get; set; }
 
-        [Required]
+        [Required, Display(Name="data inicial")]
         public DateTime DataInicial { get; set; }
 
-        [Required]
+        [Required, Display(Name="saldo inicial")]
         public decimal SaldoInicial { get; set; }
     }
 }

@@ -76,14 +76,6 @@ $(function () {
             });
     };
 
-    // List of link ids to have an ajax dialog
-    //var links = ['ajax-link'];
-    /*     'logonLink',        // Login
-    'registerLink',     // Registrar-se
-    'novaContaLink',    // Criar conta
-    'editarContaLink'   // Editar conta
-    ];*/
-
     $(".ajax-link").each(function (i, id) {
         $(this).click(function (e) {
             var link = $(this),

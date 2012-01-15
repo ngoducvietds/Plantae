@@ -1,0 +1,46 @@
+﻿.plantae-contas-table
+{
+    width: 240px;
+    color: #F8F8FC;
+}
+
+.plantae-contas-table thead 
+{
+    background-color: #222138;
+    height: 40px;
+    font-size: 1.3em;
+    font-weight: lighter;
+}
+
+.plantae-contas-table thead a 
+{
+    color: #F8F8FC;
+}
+
+.plantae-contas-table thead th
+{
+    padding: 6px;
+    text-align: left;
+}
+
+.plantae-contas-table tbody
+{
+    width: 280px;
+    font-size: 1em;
+}
+
+.plantae-contas-table tbody td
+{
+    border-bottom: 1px solid #222138;
+    border-bottom-color: #DBDBE8;
+}
+
+.contas-saldo
+{
+    float: right;
+    text-align: right;
+}
+.saldo-positivo
+{
+    color: #0099CC;
+}
