@@ -18,5 +18,12 @@ namespace Plantae.Core.Repositories
 
             return Table.Where(T => T.Owner == owner).Where(c => c.ContaID == id).SingleOrDefault();
         }
+
+        public void Update(CONTA conta, string nome, DateTime dataInicial, decimal saldoInicial)
+        {
+            conta.Nome = nome;
+            conta.DataInicial = dataInicial;
+            conta.SaldoInicial = saldoInicial;
+        }
     }
 }

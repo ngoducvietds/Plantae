@@ -11,7 +11,7 @@ namespace Plantae.Web.Models
     {
         public ContaModel(CONTA conta)
         {
-            ContaId = conta.ContaID;
+            ContaID = conta.ContaID;
             Nome = conta.Nome;
             DataInicial = conta.DataInicial;
             SaldoInicial = conta.SaldoInicial;
@@ -22,7 +22,7 @@ namespace Plantae.Web.Models
         }
 
         [Key, ScaffoldColumn(false)]
-        public long ContaId { get; set; }
+        public long ContaID { get; set; }
 
         [Required, Display(Name="nome da conta")]
         public String Nome { get; set; }

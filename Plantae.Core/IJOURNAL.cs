@@ -7,14 +7,15 @@ namespace Plantae.Core
 {
     public interface IJOURNAL
     {
-        long JournalId { get; set; }
-        CONTA ContaDebito { get; set; }
-        CONTA ContaCredito { get; set; }
-        CATEGORIA Categoria { get; set; }
+        long JournalID { get; set; }
+        CONTA CONTADEBITO { get; set; }
+        CONTA CONTACREDITO { get; set; }
+        CATEGORIA CATEGORIA { get; set; }
         string Nome { get; set; }
         DateTime Data { get; set; }
         decimal Valor { get; set; }
-        Plantae.Core.PLANTAEUTILS.Periodicidade Periodicidade { get; set; }
+        int Periodicidade { get; set; }
+        int TipoTransacao { get; set; }
         int ParcelaInicial { get; set; }
         int ParcelaTotal { get; set; }
         bool TempoIndeterminado { get; set; }

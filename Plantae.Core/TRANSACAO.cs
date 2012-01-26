@@ -16,11 +16,16 @@ namespace Plantae.Core
             Valor = valor;
             Owner = owner;
 
-            JOURNAL = new JOURNAL(this);
+            JOURNAL = new JOURNAL(this, owner);
         }
 
-        public void Update()
+        public void Update(CONTA conta, CATEGORIA categoria, string nome, DateTime data, decimal valor)
         {
+            CONTA = conta;
+            CATEGORIA = categoria;
+            Nome = nome;
+            Data = data;
+            Valor = valor;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace Plantae.Core.Repositories
             throw new NotImplementedException();
         }
 
-        public void InsertOnSubmit(T entity)
+        public virtual void InsertOnSubmit(T entity)
         {
             if (entity.Owner == null || entity.Owner.Trim().Equals(""))
                 throw new OwnerNotSpecifiedException();
@@ -62,7 +62,7 @@ namespace Plantae.Core.Repositories
             Table.InsertOnSubmit(entity);
         }
 
-        public void DeleteOnSubmit(T entity)
+        public virtual void DeleteOnSubmit(T entity)
         {
             if (entity.Owner == null || entity.Owner.Trim().Equals(""))
                 throw new OwnerNotSpecifiedException();
@@ -70,7 +70,7 @@ namespace Plantae.Core.Repositories
             Table.DeleteOnSubmit(entity);
         }
 
-        public void Save()
+        public virtual void Save()
         {
             Context.SubmitChanges();
         }
