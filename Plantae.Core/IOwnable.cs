@@ -8,5 +8,7 @@ namespace Plantae.Core
     public interface IOwnable
     {
         String Owner { get; set; }
+
+        DateTime DataAlteracao { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace Plantae.Core
         /// <param name="tempoIndeterminado"></param>
         public JOURNAL(int tipo, CONTA contaDebito, CONTA contaCredito, CATEGORIA categoria,
             string nome, DateTime data, decimal valor, string owner, int periodicidade = (int)PLANTAEUTILS.Periodicidade.Unico, 
-            int parcelaInicial = 1, int parcelaTotal = 1, bool tempoIndeterminado = false)
+            int parcelaInicial = 1, int parcelaTotal = 1, bool tempoIndeterminado = false) : this()
         {
             TipoTransacao = tipo;
             CONTADEBITO = contaDebito;
@@ -46,7 +46,7 @@ namespace Plantae.Core
         {
         }
 
-        public JOURNAL(TRANSACAO transacao, string owner)
+        public JOURNAL(TRANSACAO transacao, string owner) : this()
         {
             int tipoTransacao = 0;
             CONTA contaDebito = null;

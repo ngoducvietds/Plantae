@@ -14,7 +14,7 @@ namespace Plantae.Core
         /// <param name="dataInicial"></param>
         /// <param name="saldoInicial"></param>
         /// <param name="owner"></param>
-        public CONTA(string nome, DateTime dataInicial, decimal saldoInicial, string owner) : base()
+        public CONTA(string nome, DateTime dataInicial, decimal saldoInicial, string owner) : this()
         {
             Nome = nome;
             DataInicial = dataInicial;
@@ -51,6 +51,11 @@ namespace Plantae.Core
         public void Update(ICONTA conta)
         {
             Update(conta.Nome, conta.DataInicial, conta.SaldoInicial);
+        }
+
+        public override string ToString()
+        {
+            return this.Nome;
         }
     }
 }

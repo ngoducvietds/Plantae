@@ -32,5 +32,16 @@ namespace Plantae.Core.Properties {
                 return ((string)(this["PlantaeConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=Plantae;Persist Security Info=True;User ID=" +
+            "sa;Password=ibBR2631")]
+        public string PlantaeConnectionString1 {
+            get {
+                return ((string)(this["PlantaeConnectionString1"]));
+            }
+        }
     }
 }

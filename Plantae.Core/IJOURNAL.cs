@@ -9,8 +9,11 @@ namespace Plantae.Core
     {
         long JournalID { get; set; }
         CONTA CONTADEBITO { get; set; }
+        long? ContaDebitoID { get; set; }
         CONTA CONTACREDITO { get; set; }
+        long? ContaCreditoID { get; set; }
         CATEGORIA CATEGORIA { get; set; }
+        long CategoriaID { get; set; }
         string Nome { get; set; }
         DateTime Data { get; set; }
         decimal Valor { get; set; }

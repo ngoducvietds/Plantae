@@ -1,7 +1,11 @@
 ﻿<table>
 <thead>
     <tr>
-        <th>Transações @Html.ActionLink("+ novo crédito", "Create", "Conta", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaContaLink", data_dialog_title = "nova conta" })</th>
+        <th></th>
+        <th></th>
+        <th>Transações @Html.ActionLink("+ novo crédito", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo crédito" })</th>
+        <th>Transações @Html.ActionLink("- novo débito", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo débito" })</th>
+        <th>Transações @Html.ActionLink("<> nova transferência ", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "nova transferência" })</th>
     </tr>
 </thead>
 <tbody>

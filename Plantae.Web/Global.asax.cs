@@ -27,11 +27,19 @@ namespace Plantae.Web
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
+            routes.MapRoute(
+                null,
+                "transacoes/create/{tipo}",
+                new { Controller = "Transacoes", action = "Create", tipo = UrlParameter.Optional }
+             );
+
         }
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

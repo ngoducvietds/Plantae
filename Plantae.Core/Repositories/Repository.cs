@@ -72,6 +72,16 @@ namespace Plantae.Core.Repositories
 
         public virtual void Save()
         {
+            DateTime dataAlteracao = DateTime.Now;
+
+            var changes = Context.GetChangeSet();
+
+            foreach (IOwnable change in changes.Updates)
+                change.DataAlteracao = dataAlteracao;
+
+            foreach (IOwnable change in changes.Inserts)
+                change.DataAlteracao = dataAlteracao;
+
             Context.SubmitChanges();
         }
 

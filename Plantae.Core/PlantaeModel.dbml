@@ -6,21 +6,23 @@
       <Column Name="Nome" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="CATEGORIA_JOURNAL" Member="JOURNALS" ThisKey="CategoriaID" OtherKey="Categoria" Type="JOURNAL" />
-      <Association Name="CATEGORIA_TRANSACAO" Member="TRANSACOES" ThisKey="CategoriaID" OtherKey="Categoria" Type="TRANSACAO" />
+      <Column Name="DataAlteracao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CATEGORIA_JOURNAL" Member="JOURNALS" ThisKey="CategoriaID" OtherKey="CategoriaID" Type="JOURNAL" />
+      <Association Name="CATEGORIA_TRANSACAO" Member="TRANSACOES" ThisKey="CategoriaID" OtherKey="CategoriaID" Type="TRANSACAO" />
     </Type>
   </Table>
   <Table Name="dbo.TRANSFERENCIA" Member="TRANSFERENCIAs">
     <Type Name="TRANSFERENCIA">
       <Column Name="TransferenciaID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Journal" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Debito" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Credito" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="JournalID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DebitoID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CreditoID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="JOURNAL_TRANSFERENCIA" Member="JOURNAL" ThisKey="Journal" OtherKey="JournalID" Type="JOURNAL" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="TRANSACAO_TRANSFERENCIA" Member="TRANSACAOCREDITO" ThisKey="Credito" OtherKey="TransacaoID" Type="TRANSACAO" IsForeignKey="true" />
-      <Association Name="TRANSACAO_TRANSFERENCIA1" Member="TRANSACAODEBITO" ThisKey="Debito" OtherKey="TransacaoID" Type="TRANSACAO" IsForeignKey="true" />
+      <Column Name="DataAlteracao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="JOURNAL_TRANSFERENCIA" Member="JOURNAL" ThisKey="JournalID" OtherKey="JournalID" Type="JOURNAL" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TRANSACAO_TRANSFERENCIA" Member="CREDITO" ThisKey="CreditoID" OtherKey="TransacaoID" Type="TRANSACAO" IsForeignKey="true" />
+      <Association Name="TRANSACAO_TRANSFERENCIA1" Member="DEBITO" ThisKey="DebitoID" OtherKey="TransacaoID" Type="TRANSACAO" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CONTA" Member="CONTAs">
@@ -28,24 +30,25 @@
       <Column Name="ContaID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nome" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="DataInicial" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="SaldoInicial" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="SaldoInicial" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="CONTA_JOURNAL" Member="JOURNALSCREDITO" ThisKey="ContaID" OtherKey="ContaCredito" Type="JOURNAL" />
-      <Association Name="CONTA_JOURNAL1" Member="JOURNALSDEBITO" ThisKey="ContaID" OtherKey="ContaDebito" Type="JOURNAL" />
-      <Association Name="CONTA_TRANSACAO" Member="TRANSACOES" ThisKey="ContaID" OtherKey="Conta" Type="TRANSACAO" />
+      <Column Name="DataAlteracao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="CONTA_JOURNAL" Member="JOURNALSCREDITO" ThisKey="ContaID" OtherKey="ContaCreditoID" Type="JOURNAL" />
+      <Association Name="CONTA_JOURNAL1" Member="JOURNALSDEBITO" ThisKey="ContaID" OtherKey="ContaDebitoID" Type="JOURNAL" />
+      <Association Name="CONTA_TRANSACAO" Member="TRANSACOES" ThisKey="ContaID" OtherKey="ContaID" Type="TRANSACAO" />
     </Type>
   </Table>
   <Table Name="dbo.JOURNAL" Member="JOURNALs">
     <Type Name="JOURNAL">
       <Column Name="JournalID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TipoTransacao" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ContaDebito" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="ContaCredito" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="Categoria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ContaDebitoID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ContaCreditoID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CategoriaID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Nome" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="Periodicidade" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ParcelaInicial" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ParcelaTotal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -53,29 +56,32 @@
       <Column Name="UltimaAtualizacao" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="JOURNAL_TRANSFERENCIA" Member="TRANSFERENCIAS" ThisKey="JournalID" OtherKey="Journal" Type="TRANSFERENCIA" />
-      <Association Name="JOURNAL_TRANSACAO" Member="TRANSACOES" ThisKey="JournalID" OtherKey="Journal" Type="TRANSACAO" />
-      <Association Name="CATEGORIA_JOURNAL" Member="CATEGORIA" ThisKey="Categoria" OtherKey="CategoriaID" Type="CATEGORIA" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="CONTA_JOURNAL" Member="CONTACREDITO" ThisKey="ContaCredito" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
-      <Association Name="CONTA_JOURNAL1" Member="CONTADEBITO" ThisKey="ContaDebito" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
+      <Column Name="DataAlteracao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="JOURNAL_TRANSFERENCIA" Member="TRANSFERENCIAS" ThisKey="JournalID" OtherKey="JournalID" Type="TRANSFERENCIA" />
+      <Association Name="JOURNAL_TRANSACAO" Member="TRANSACOES" ThisKey="JournalID" OtherKey="JournalID" Type="TRANSACAO" />
+      <Association Name="CATEGORIA_JOURNAL" Member="CATEGORIA" ThisKey="CategoriaID" OtherKey="CategoriaID" Type="CATEGORIA" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="CONTA_JOURNAL" Member="CONTACREDITO" ThisKey="ContaCreditoID" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
+      <Association Name="CONTA_JOURNAL1" Member="CONTADEBITO" ThisKey="ContaDebitoID" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TRANSACAO" Member="TRANSACAOs">
     <Type Name="TRANSACAO">
       <Column Name="TransacaoID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Journal" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Conta" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Categoria" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="JournalID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ContaID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CategoriaID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Nome" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Valor" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="NumParcela" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Owner" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Guid" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="TRANSACAO_TRANSFERENCIA" Member="TRANSFERENCIASCREDITO" ThisKey="TransacaoID" OtherKey="Credito" Type="TRANSFERENCIA" />
-      <Association Name="TRANSACAO_TRANSFERENCIA1" Member="TRANSFERENCIASDEBITO" ThisKey="TransacaoID" OtherKey="Debito" Type="TRANSFERENCIA" />
-      <Association Name="CATEGORIA_TRANSACAO" Member="CATEGORIA" ThisKey="Categoria" OtherKey="CategoriaID" Type="CATEGORIA" IsForeignKey="true" />
-      <Association Name="CONTA_TRANSACAO" Member="CONTA" ThisKey="Conta" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
-      <Association Name="JOURNAL_TRANSACAO" Member="JOURNAL" ThisKey="Journal" OtherKey="JournalID" Type="JOURNAL" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Column Name="DataAlteracao" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="TRANSACAO_TRANSFERENCIA" Member="TRANSFERENCIASCREDITO" ThisKey="TransacaoID" OtherKey="CreditoID" Type="TRANSFERENCIA" />
+      <Association Name="TRANSACAO_TRANSFERENCIA1" Member="TRANSFERENCIASDEBITO" ThisKey="TransacaoID" OtherKey="DebitoID" Type="TRANSFERENCIA" />
+      <Association Name="CATEGORIA_TRANSACAO" Member="CATEGORIA" ThisKey="CategoriaID" OtherKey="CategoriaID" Type="CATEGORIA" IsForeignKey="true" />
+      <Association Name="CONTA_TRANSACAO" Member="CONTA" ThisKey="ContaID" OtherKey="ContaID" Type="CONTA" IsForeignKey="true" />
+      <Association Name="JOURNAL_TRANSACAO" Member="JOURNAL" ThisKey="JournalID" OtherKey="JournalID" Type="JOURNAL" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

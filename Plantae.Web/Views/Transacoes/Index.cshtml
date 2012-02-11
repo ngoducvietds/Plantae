@@ -3,6 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div id="content_transacoes">
+    <div id="content_transacoes_left">
+        @Html.Partial("_ContasResumoPartial")
+    </div>
+    <div id="content_transacoes_right">
+        @Html.Partial("_TransacoesExtratoPartial");
+    </div>
+</div>
 
-@Html.Partial("_ContasResumoPartial")
+
+

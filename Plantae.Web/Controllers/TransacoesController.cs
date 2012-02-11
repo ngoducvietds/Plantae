@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Plantae.Core;
 using Plantae.Core.Repositories;
 using Plantae.Web.Models;
+using Plantae.Core.Services;
 
 namespace Plantae.Web.Controllers
 {
@@ -13,12 +14,14 @@ namespace Plantae.Web.Controllers
     public class TransacoesController : Controller
     {
         ContaRepository contaRepository;
+        CategoriaRepository categoriaRepository;
         JournalRepository journalRepository;
         TransacaoRepository transacaoRepository;
 
         public TransacoesController()
         {
             contaRepository = new ContaRepository(new ContextFactory());
+            categoriaRepository = new CategoriaRepository(new ContextFactory());
             journalRepository = new JournalRepository(new ContextFactory());
             transacaoRepository = new TransacaoRepository(new ContextFactory());
         }
@@ -33,20 +36,31 @@ namespace Plantae.Web.Controllers
             return View();
         }
 
-        //
-        // GET: /Transacoes/Details/5
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int id)
         {
             return View();
         }
         
         /// <summary>
-        /// 
+        /// Ação para criar uma transação. Obtém o tipo da transação pela rota recebida na requisição
+        /// e chama a View com o form para criar a nova transação.
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
+            string tipo = Request["tipo"];
+
+            ViewBag.TipoTransacao = GetTipoTransacaoValue(tipo).ToString();
+            ViewBag.ContasDebito = new SelectList(contaRepository.GetAll(User.Identity.Name), "ContaID", "Nome");
+            ViewBag.ContasCredito = new SelectList(contaRepository.GetAll(User.Identity.Name), "ContaID", "Nome");
+            ViewBag.Categorias = new SelectList(categoriaRepository.GetAll(User.Identity.Name), "CategoriaID", "Nome");
+
             return ContextDependentView();
         } 
 
@@ -140,6 +154,22 @@ namespace Plantae.Web.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        private int GetTipoTransacaoValue(string tipo)
+        {
+            switch (tipo)
+            {
+                case "credito":
+                    return (int)PLANTAEUTILS.TipoTransacao.Credito;
+                case "debito":
+                    return (int)PLANTAEUTILS.TipoTransacao.Debito;
+                case "transferencia":
+                    return (int)PLANTAEUTILS.TipoTransacao.Transferencia;
+                default:
+                    return (int)PLANTAEUTILS.TipoTransacao.Credito;
+
             }
         }
 

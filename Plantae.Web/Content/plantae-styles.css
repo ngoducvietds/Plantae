@@ -10,7 +10,7 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
-    font-family: "Lucida Sans Unicode", "Tahoma", "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: "Tahoma", "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
 }
@@ -22,6 +22,11 @@ a:active, a:hover {
     padding-left: 3px;
     padding-right: 3px;
     text-decoration: underline;
+}
+
+.icon 
+{
+    vertical-align: middle;
 }
 
 a:hover {
@@ -99,8 +104,6 @@ h5, h6 {
 
     .main-content {
         background: url("../images/accent.png") no-repeat;
-        padding-left: 10px;
-        padding-top: 30px;
     }
 
     .featured + .main-content {
@@ -169,6 +172,7 @@ ul#menu {
     font-size: 1.3em;
     font-weight: 600;
     margin: 0;
+    margin-top: 20px;
     text-align: right;
 }
 
@@ -641,4 +645,16 @@ ul#social li {
             text-indent: 0;
             width: auto;
         }    
+}
+
+
+/* Transações */
+#content_transacoes_left 
+{
+    float: left;
+}
+
+#content_transacoes_right
+{
+    float: right;
 }

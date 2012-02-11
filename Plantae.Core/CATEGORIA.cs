@@ -17,5 +17,10 @@ namespace Plantae.Core
         {
             Nome = nome;
         }
+
+        public override string ToString()
+        {
+            return this.Nome;
+        }
     }
 }

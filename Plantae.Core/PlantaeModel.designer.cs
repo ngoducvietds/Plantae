@@ -132,6 +132,8 @@ namespace Plantae.Core
 		
 		private System.Guid _Guid;
 		
+		private System.DateTime _DataAlteracao;
+		
 		private EntitySet<JOURNAL> _JOURNALS;
 		
 		private EntitySet<TRANSACAO> _TRANSACOES;
@@ -148,6 +150,8 @@ namespace Plantae.Core
     partial void OnOwnerChanged();
     partial void OnGuidChanging(System.Guid value);
     partial void OnGuidChanged();
+    partial void OnDataAlteracaoChanging(System.DateTime value);
+    partial void OnDataAlteracaoChanged();
     #endregion
 		
 		public CATEGORIA()
@@ -237,7 +241,27 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_JOURNALS", ThisKey="CategoriaID", OtherKey="Categoria")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DataAlteracao", DbType="DateTime NOT NULL")]
+		public System.DateTime DataAlteracao
+		{
+			get
+			{
+				return this._DataAlteracao;
+			}
+			set
+			{
+				if ((this._DataAlteracao != value))
+				{
+					this.OnDataAlteracaoChanging(value);
+					this.SendPropertyChanging();
+					this._DataAlteracao = value;
+					this.SendPropertyChanged("DataAlteracao");
+					this.OnDataAlteracaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_JOURNALS", ThisKey="CategoriaID", OtherKey="CategoriaID")]
 		public EntitySet<JOURNAL> JOURNALS
 		{
 			get
@@ -250,7 +274,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_TRANSACOES", ThisKey="CategoriaID", OtherKey="Categoria")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_TRANSACOES", ThisKey="CategoriaID", OtherKey="CategoriaID")]
 		public EntitySet<TRANSACAO> TRANSACOES
 		{
 			get
@@ -316,21 +340,23 @@ namespace Plantae.Core
 		
 		private long _TransferenciaID;
 		
-		private long _Journal;
+		private long _JournalID;
 		
-		private long _Debito;
+		private long _DebitoID;
 		
-		private long _Credito;
+		private long _CreditoID;
 		
 		private string _Owner;
 		
 		private System.Guid _Guid;
 		
+		private System.DateTime _DataAlteracao;
+		
 		private EntityRef<JOURNAL> _JOURNAL;
 		
-		private EntityRef<TRANSACAO> _TRANSACAOCREDITO;
+		private EntityRef<TRANSACAO> _CREDITO;
 		
-		private EntityRef<TRANSACAO> _TRANSACAODEBITO;
+		private EntityRef<TRANSACAO> _DEBITO;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -338,23 +364,25 @@ namespace Plantae.Core
     partial void OnCreated();
     partial void OnTransferenciaIDChanging(long value);
     partial void OnTransferenciaIDChanged();
-    partial void OnJournalChanging(long value);
-    partial void OnJournalChanged();
-    partial void OnDebitoChanging(long value);
-    partial void OnDebitoChanged();
-    partial void OnCreditoChanging(long value);
-    partial void OnCreditoChanged();
+    partial void OnJournalIDChanging(long value);
+    partial void OnJournalIDChanged();
+    partial void OnDebitoIDChanging(long value);
+    partial void OnDebitoIDChanged();
+    partial void OnCreditoIDChanging(long value);
+    partial void OnCreditoIDChanged();
     partial void OnOwnerChanging(string value);
     partial void OnOwnerChanged();
     partial void OnGuidChanging(System.Guid value);
     partial void OnGuidChanged();
+    partial void OnDataAlteracaoChanging(System.DateTime value);
+    partial void OnDataAlteracaoChanged();
     #endregion
 		
 		public TRANSFERENCIA()
 		{
 			this._JOURNAL = default(EntityRef<JOURNAL>);
-			this._TRANSACAOCREDITO = default(EntityRef<TRANSACAO>);
-			this._TRANSACAODEBITO = default(EntityRef<TRANSACAO>);
+			this._CREDITO = default(EntityRef<TRANSACAO>);
+			this._DEBITO = default(EntityRef<TRANSACAO>);
 			OnCreated();
 		}
 		
@@ -378,74 +406,74 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Journal", DbType="BigInt NOT NULL")]
-		public long Journal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JournalID", DbType="BigInt NOT NULL")]
+		public long JournalID
 		{
 			get
 			{
-				return this._Journal;
+				return this._JournalID;
 			}
 			set
 			{
-				if ((this._Journal != value))
+				if ((this._JournalID != value))
 				{
 					if (this._JOURNAL.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnJournalChanging(value);
+					this.OnJournalIDChanging(value);
 					this.SendPropertyChanging();
-					this._Journal = value;
-					this.SendPropertyChanged("Journal");
-					this.OnJournalChanged();
+					this._JournalID = value;
+					this.SendPropertyChanged("JournalID");
+					this.OnJournalIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Debito", DbType="BigInt NOT NULL")]
-		public long Debito
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DebitoID", DbType="BigInt NOT NULL")]
+		public long DebitoID
 		{
 			get
 			{
-				return this._Debito;
+				return this._DebitoID;
 			}
 			set
 			{
-				if ((this._Debito != value))
+				if ((this._DebitoID != value))
 				{
-					if (this._TRANSACAODEBITO.HasLoadedOrAssignedValue)
+					if (this._DEBITO.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnDebitoChanging(value);
+					this.OnDebitoIDChanging(value);
 					this.SendPropertyChanging();
-					this._Debito = value;
-					this.SendPropertyChanged("Debito");
-					this.OnDebitoChanged();
+					this._DebitoID = value;
+					this.SendPropertyChanged("DebitoID");
+					this.OnDebitoIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Credito", DbType="BigInt NOT NULL")]
-		public long Credito
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreditoID", DbType="BigInt NOT NULL")]
+		public long CreditoID
 		{
 			get
 			{
-				return this._Credito;
+				return this._CreditoID;
 			}
 			set
 			{
-				if ((this._Credito != value))
+				if ((this._CreditoID != value))
 				{
-					if (this._TRANSACAOCREDITO.HasLoadedOrAssignedValue)
+					if (this._CREDITO.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCreditoChanging(value);
+					this.OnCreditoIDChanging(value);
 					this.SendPropertyChanging();
-					this._Credito = value;
-					this.SendPropertyChanged("Credito");
-					this.OnCreditoChanged();
+					this._CreditoID = value;
+					this.SendPropertyChanged("CreditoID");
+					this.OnCreditoIDChanged();
 				}
 			}
 		}
@@ -490,7 +518,27 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_JOURNAL", ThisKey="Journal", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DataAlteracao", DbType="DateTime NOT NULL")]
+		public System.DateTime DataAlteracao
+		{
+			get
+			{
+				return this._DataAlteracao;
+			}
+			set
+			{
+				if ((this._DataAlteracao != value))
+				{
+					this.OnDataAlteracaoChanging(value);
+					this.SendPropertyChanging();
+					this._DataAlteracao = value;
+					this.SendPropertyChanged("DataAlteracao");
+					this.OnDataAlteracaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_JOURNAL", ThisKey="JournalID", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public JOURNAL JOURNAL
 		{
 			get
@@ -513,81 +561,81 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.TRANSFERENCIAS.Add(this);
-						this._Journal = value.JournalID;
+						this._JournalID = value.JournalID;
 					}
 					else
 					{
-						this._Journal = default(long);
+						this._JournalID = default(long);
 					}
 					this.SendPropertyChanged("JOURNAL");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_TRANSACAOCREDITO", ThisKey="Credito", OtherKey="TransacaoID", IsForeignKey=true)]
-		public TRANSACAO TRANSACAOCREDITO
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_CREDITO", ThisKey="CreditoID", OtherKey="TransacaoID", IsForeignKey=true)]
+		public TRANSACAO CREDITO
 		{
 			get
 			{
-				return this._TRANSACAOCREDITO.Entity;
+				return this._CREDITO.Entity;
 			}
 			set
 			{
-				TRANSACAO previousValue = this._TRANSACAOCREDITO.Entity;
+				TRANSACAO previousValue = this._CREDITO.Entity;
 				if (((previousValue != value) 
-							|| (this._TRANSACAOCREDITO.HasLoadedOrAssignedValue == false)))
+							|| (this._CREDITO.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._TRANSACAOCREDITO.Entity = null;
+						this._CREDITO.Entity = null;
 						previousValue.TRANSFERENCIASCREDITO.Remove(this);
 					}
-					this._TRANSACAOCREDITO.Entity = value;
+					this._CREDITO.Entity = value;
 					if ((value != null))
 					{
 						value.TRANSFERENCIASCREDITO.Add(this);
-						this._Credito = value.TransacaoID;
+						this._CreditoID = value.TransacaoID;
 					}
 					else
 					{
-						this._Credito = default(long);
+						this._CreditoID = default(long);
 					}
-					this.SendPropertyChanged("TRANSACAOCREDITO");
+					this.SendPropertyChanged("CREDITO");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_TRANSACAODEBITO", ThisKey="Debito", OtherKey="TransacaoID", IsForeignKey=true)]
-		public TRANSACAO TRANSACAODEBITO
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_DEBITO", ThisKey="DebitoID", OtherKey="TransacaoID", IsForeignKey=true)]
+		public TRANSACAO DEBITO
 		{
 			get
 			{
-				return this._TRANSACAODEBITO.Entity;
+				return this._DEBITO.Entity;
 			}
 			set
 			{
-				TRANSACAO previousValue = this._TRANSACAODEBITO.Entity;
+				TRANSACAO previousValue = this._DEBITO.Entity;
 				if (((previousValue != value) 
-							|| (this._TRANSACAODEBITO.HasLoadedOrAssignedValue == false)))
+							|| (this._DEBITO.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._TRANSACAODEBITO.Entity = null;
+						this._DEBITO.Entity = null;
 						previousValue.TRANSFERENCIASDEBITO.Remove(this);
 					}
-					this._TRANSACAODEBITO.Entity = value;
+					this._DEBITO.Entity = value;
 					if ((value != null))
 					{
 						value.TRANSFERENCIASDEBITO.Add(this);
-						this._Debito = value.TransacaoID;
+						this._DebitoID = value.TransacaoID;
 					}
 					else
 					{
-						this._Debito = default(long);
+						this._DebitoID = default(long);
 					}
-					this.SendPropertyChanged("TRANSACAODEBITO");
+					this.SendPropertyChanged("DEBITO");
 				}
 			}
 		}
@@ -631,6 +679,8 @@ namespace Plantae.Core
 		
 		private System.Guid _Guid;
 		
+		private System.DateTime _DataAlteracao;
+		
 		private EntitySet<JOURNAL> _JOURNALSCREDITO;
 		
 		private EntitySet<JOURNAL> _JOURNALSDEBITO;
@@ -653,6 +703,8 @@ namespace Plantae.Core
     partial void OnOwnerChanged();
     partial void OnGuidChanging(System.Guid value);
     partial void OnGuidChanged();
+    partial void OnDataAlteracaoChanging(System.DateTime value);
+    partial void OnDataAlteracaoChanged();
     #endregion
 		
 		public CONTA()
@@ -723,7 +775,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SaldoInicial", DbType="Decimal(18,0) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SaldoInicial", DbType="Decimal(18,2) NOT NULL")]
 		public decimal SaldoInicial
 		{
 			get
@@ -783,7 +835,27 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_JOURNALSCREDITO", ThisKey="ContaID", OtherKey="ContaCredito")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DataAlteracao", DbType="DateTime NOT NULL")]
+		public System.DateTime DataAlteracao
+		{
+			get
+			{
+				return this._DataAlteracao;
+			}
+			set
+			{
+				if ((this._DataAlteracao != value))
+				{
+					this.OnDataAlteracaoChanging(value);
+					this.SendPropertyChanging();
+					this._DataAlteracao = value;
+					this.SendPropertyChanged("DataAlteracao");
+					this.OnDataAlteracaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_JOURNALSCREDITO", ThisKey="ContaID", OtherKey="ContaCreditoID")]
 		public EntitySet<JOURNAL> JOURNALSCREDITO
 		{
 			get
@@ -796,7 +868,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_JOURNALSDEBITO", ThisKey="ContaID", OtherKey="ContaDebito")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_JOURNALSDEBITO", ThisKey="ContaID", OtherKey="ContaDebitoID")]
 		public EntitySet<JOURNAL> JOURNALSDEBITO
 		{
 			get
@@ -809,7 +881,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_TRANSACOES", ThisKey="ContaID", OtherKey="Conta")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_TRANSACOES", ThisKey="ContaID", OtherKey="ContaID")]
 		public EntitySet<TRANSACAO> TRANSACOES
 		{
 			get
@@ -889,11 +961,11 @@ namespace Plantae.Core
 		
 		private int _TipoTransacao;
 		
-		private System.Nullable<long> _ContaDebito;
+		private System.Nullable<long> _ContaDebitoID;
 		
-		private System.Nullable<long> _ContaCredito;
+		private System.Nullable<long> _ContaCreditoID;
 		
-		private long _Categoria;
+		private long _CategoriaID;
 		
 		private string _Nome;
 		
@@ -915,6 +987,8 @@ namespace Plantae.Core
 		
 		private System.Guid _Guid;
 		
+		private System.DateTime _DataAlteracao;
+		
 		private EntitySet<TRANSFERENCIA> _TRANSFERENCIAS;
 		
 		private EntitySet<TRANSACAO> _TRANSACOES;
@@ -933,12 +1007,12 @@ namespace Plantae.Core
     partial void OnJournalIDChanged();
     partial void OnTipoTransacaoChanging(int value);
     partial void OnTipoTransacaoChanged();
-    partial void OnContaDebitoChanging(System.Nullable<long> value);
-    partial void OnContaDebitoChanged();
-    partial void OnContaCreditoChanging(System.Nullable<long> value);
-    partial void OnContaCreditoChanged();
-    partial void OnCategoriaChanging(long value);
-    partial void OnCategoriaChanged();
+    partial void OnContaDebitoIDChanging(System.Nullable<long> value);
+    partial void OnContaDebitoIDChanged();
+    partial void OnContaCreditoIDChanging(System.Nullable<long> value);
+    partial void OnContaCreditoIDChanged();
+    partial void OnCategoriaIDChanging(long value);
+    partial void OnCategoriaIDChanged();
     partial void OnNomeChanging(string value);
     partial void OnNomeChanged();
     partial void OnDataChanging(System.DateTime value);
@@ -959,6 +1033,8 @@ namespace Plantae.Core
     partial void OnOwnerChanged();
     partial void OnGuidChanging(System.Guid value);
     partial void OnGuidChanged();
+    partial void OnDataAlteracaoChanging(System.DateTime value);
+    partial void OnDataAlteracaoChanged();
     #endregion
 		
 		public JOURNAL()
@@ -1011,74 +1087,74 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaDebito", DbType="BigInt")]
-		public System.Nullable<long> ContaDebito
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaDebitoID", DbType="BigInt")]
+		public System.Nullable<long> ContaDebitoID
 		{
 			get
 			{
-				return this._ContaDebito;
+				return this._ContaDebitoID;
 			}
 			set
 			{
-				if ((this._ContaDebito != value))
+				if ((this._ContaDebitoID != value))
 				{
 					if (this._CONTADEBITO.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnContaDebitoChanging(value);
+					this.OnContaDebitoIDChanging(value);
 					this.SendPropertyChanging();
-					this._ContaDebito = value;
-					this.SendPropertyChanged("ContaDebito");
-					this.OnContaDebitoChanged();
+					this._ContaDebitoID = value;
+					this.SendPropertyChanged("ContaDebitoID");
+					this.OnContaDebitoIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaCredito", DbType="BigInt")]
-		public System.Nullable<long> ContaCredito
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaCreditoID", DbType="BigInt")]
+		public System.Nullable<long> ContaCreditoID
 		{
 			get
 			{
-				return this._ContaCredito;
+				return this._ContaCreditoID;
 			}
 			set
 			{
-				if ((this._ContaCredito != value))
+				if ((this._ContaCreditoID != value))
 				{
 					if (this._CONTACREDITO.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnContaCreditoChanging(value);
+					this.OnContaCreditoIDChanging(value);
 					this.SendPropertyChanging();
-					this._ContaCredito = value;
-					this.SendPropertyChanged("ContaCredito");
-					this.OnContaCreditoChanged();
+					this._ContaCreditoID = value;
+					this.SendPropertyChanged("ContaCreditoID");
+					this.OnContaCreditoIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="BigInt NOT NULL")]
-		public long Categoria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoriaID", DbType="BigInt NOT NULL")]
+		public long CategoriaID
 		{
 			get
 			{
-				return this._Categoria;
+				return this._CategoriaID;
 			}
 			set
 			{
-				if ((this._Categoria != value))
+				if ((this._CategoriaID != value))
 				{
 					if (this._CATEGORIA.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCategoriaChanging(value);
+					this.OnCategoriaIDChanging(value);
 					this.SendPropertyChanging();
-					this._Categoria = value;
-					this.SendPropertyChanged("Categoria");
-					this.OnCategoriaChanged();
+					this._CategoriaID = value;
+					this.SendPropertyChanged("CategoriaID");
+					this.OnCategoriaIDChanged();
 				}
 			}
 		}
@@ -1123,7 +1199,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,0) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,2) NOT NULL")]
 		public decimal Valor
 		{
 			get
@@ -1283,7 +1359,27 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_TRANSFERENCIAS", ThisKey="JournalID", OtherKey="Journal")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DataAlteracao", DbType="DateTime NOT NULL")]
+		public System.DateTime DataAlteracao
+		{
+			get
+			{
+				return this._DataAlteracao;
+			}
+			set
+			{
+				if ((this._DataAlteracao != value))
+				{
+					this.OnDataAlteracaoChanging(value);
+					this.SendPropertyChanging();
+					this._DataAlteracao = value;
+					this.SendPropertyChanged("DataAlteracao");
+					this.OnDataAlteracaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSFERENCIA", Storage="_TRANSFERENCIAS", ThisKey="JournalID", OtherKey="JournalID")]
 		public EntitySet<TRANSFERENCIA> TRANSFERENCIAS
 		{
 			get
@@ -1296,7 +1392,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_TRANSACOES", ThisKey="JournalID", OtherKey="Journal")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_TRANSACOES", ThisKey="JournalID", OtherKey="JournalID")]
 		public EntitySet<TRANSACAO> TRANSACOES
 		{
 			get
@@ -1309,7 +1405,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_CATEGORIA", ThisKey="Categoria", OtherKey="CategoriaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_JOURNAL", Storage="_CATEGORIA", ThisKey="CategoriaID", OtherKey="CategoriaID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public CATEGORIA CATEGORIA
 		{
 			get
@@ -1332,18 +1428,18 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.JOURNALS.Add(this);
-						this._Categoria = value.CategoriaID;
+						this._CategoriaID = value.CategoriaID;
 					}
 					else
 					{
-						this._Categoria = default(long);
+						this._CategoriaID = default(long);
 					}
 					this.SendPropertyChanged("CATEGORIA");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_CONTACREDITO", ThisKey="ContaCredito", OtherKey="ContaID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL", Storage="_CONTACREDITO", ThisKey="ContaCreditoID", OtherKey="ContaID", IsForeignKey=true)]
 		public CONTA CONTACREDITO
 		{
 			get
@@ -1366,18 +1462,18 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.JOURNALSCREDITO.Add(this);
-						this._ContaCredito = value.ContaID;
+						this._ContaCreditoID = value.ContaID;
 					}
 					else
 					{
-						this._ContaCredito = default(Nullable<long>);
+						this._ContaCreditoID = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("CONTACREDITO");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_CONTADEBITO", ThisKey="ContaDebito", OtherKey="ContaID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_JOURNAL1", Storage="_CONTADEBITO", ThisKey="ContaDebitoID", OtherKey="ContaID", IsForeignKey=true)]
 		public CONTA CONTADEBITO
 		{
 			get
@@ -1400,11 +1496,11 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.JOURNALSDEBITO.Add(this);
-						this._ContaDebito = value.ContaID;
+						this._ContaDebitoID = value.ContaID;
 					}
 					else
 					{
-						this._ContaDebito = default(Nullable<long>);
+						this._ContaDebitoID = default(Nullable<long>);
 					}
 					this.SendPropertyChanged("CONTADEBITO");
 				}
@@ -1464,11 +1560,11 @@ namespace Plantae.Core
 		
 		private long _TransacaoID;
 		
-		private long _Journal;
+		private long _JournalID;
 		
-		private long _Conta;
+		private long _ContaID;
 		
-		private long _Categoria;
+		private long _CategoriaID;
 		
 		private string _Nome;
 		
@@ -1476,9 +1572,13 @@ namespace Plantae.Core
 		
 		private decimal _Valor;
 		
+		private System.Nullable<int> _NumParcela;
+		
 		private string _Owner;
 		
 		private System.Guid _Guid;
+		
+		private System.DateTime _DataAlteracao;
 		
 		private EntitySet<TRANSFERENCIA> _TRANSFERENCIASCREDITO;
 		
@@ -1496,22 +1596,26 @@ namespace Plantae.Core
     partial void OnCreated();
     partial void OnTransacaoIDChanging(long value);
     partial void OnTransacaoIDChanged();
-    partial void OnJournalChanging(long value);
-    partial void OnJournalChanged();
-    partial void OnContaChanging(long value);
-    partial void OnContaChanged();
-    partial void OnCategoriaChanging(long value);
-    partial void OnCategoriaChanged();
+    partial void OnJournalIDChanging(long value);
+    partial void OnJournalIDChanged();
+    partial void OnContaIDChanging(long value);
+    partial void OnContaIDChanged();
+    partial void OnCategoriaIDChanging(long value);
+    partial void OnCategoriaIDChanged();
     partial void OnNomeChanging(string value);
     partial void OnNomeChanged();
     partial void OnDataChanging(System.DateTime value);
     partial void OnDataChanged();
     partial void OnValorChanging(decimal value);
     partial void OnValorChanged();
+    partial void OnNumParcelaChanging(System.Nullable<int> value);
+    partial void OnNumParcelaChanged();
     partial void OnOwnerChanging(string value);
     partial void OnOwnerChanged();
     partial void OnGuidChanging(System.Guid value);
     partial void OnGuidChanged();
+    partial void OnDataAlteracaoChanging(System.DateTime value);
+    partial void OnDataAlteracaoChanged();
     #endregion
 		
 		public TRANSACAO()
@@ -1544,74 +1648,74 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Journal", DbType="BigInt NOT NULL")]
-		public long Journal
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JournalID", DbType="BigInt NOT NULL")]
+		public long JournalID
 		{
 			get
 			{
-				return this._Journal;
+				return this._JournalID;
 			}
 			set
 			{
-				if ((this._Journal != value))
+				if ((this._JournalID != value))
 				{
 					if (this._JOURNAL.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnJournalChanging(value);
+					this.OnJournalIDChanging(value);
 					this.SendPropertyChanging();
-					this._Journal = value;
-					this.SendPropertyChanged("Journal");
-					this.OnJournalChanged();
+					this._JournalID = value;
+					this.SendPropertyChanged("JournalID");
+					this.OnJournalIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Conta", DbType="BigInt NOT NULL")]
-		public long Conta
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContaID", DbType="BigInt NOT NULL")]
+		public long ContaID
 		{
 			get
 			{
-				return this._Conta;
+				return this._ContaID;
 			}
 			set
 			{
-				if ((this._Conta != value))
+				if ((this._ContaID != value))
 				{
 					if (this._CONTA.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnContaChanging(value);
+					this.OnContaIDChanging(value);
 					this.SendPropertyChanging();
-					this._Conta = value;
-					this.SendPropertyChanged("Conta");
-					this.OnContaChanged();
+					this._ContaID = value;
+					this.SendPropertyChanged("ContaID");
+					this.OnContaIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Categoria", DbType="BigInt NOT NULL")]
-		public long Categoria
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoriaID", DbType="BigInt NOT NULL")]
+		public long CategoriaID
 		{
 			get
 			{
-				return this._Categoria;
+				return this._CategoriaID;
 			}
 			set
 			{
-				if ((this._Categoria != value))
+				if ((this._CategoriaID != value))
 				{
 					if (this._CATEGORIA.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnCategoriaChanging(value);
+					this.OnCategoriaIDChanging(value);
 					this.SendPropertyChanging();
-					this._Categoria = value;
-					this.SendPropertyChanged("Categoria");
-					this.OnCategoriaChanged();
+					this._CategoriaID = value;
+					this.SendPropertyChanged("CategoriaID");
+					this.OnCategoriaIDChanged();
 				}
 			}
 		}
@@ -1656,7 +1760,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,0) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Valor", DbType="Decimal(18,2) NOT NULL")]
 		public decimal Valor
 		{
 			get
@@ -1672,6 +1776,26 @@ namespace Plantae.Core
 					this._Valor = value;
 					this.SendPropertyChanged("Valor");
 					this.OnValorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumParcela", DbType="Int")]
+		public System.Nullable<int> NumParcela
+		{
+			get
+			{
+				return this._NumParcela;
+			}
+			set
+			{
+				if ((this._NumParcela != value))
+				{
+					this.OnNumParcelaChanging(value);
+					this.SendPropertyChanging();
+					this._NumParcela = value;
+					this.SendPropertyChanged("NumParcela");
+					this.OnNumParcelaChanged();
 				}
 			}
 		}
@@ -1716,7 +1840,27 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_TRANSFERENCIASCREDITO", ThisKey="TransacaoID", OtherKey="Credito")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DataAlteracao", DbType="DateTime NOT NULL")]
+		public System.DateTime DataAlteracao
+		{
+			get
+			{
+				return this._DataAlteracao;
+			}
+			set
+			{
+				if ((this._DataAlteracao != value))
+				{
+					this.OnDataAlteracaoChanging(value);
+					this.SendPropertyChanging();
+					this._DataAlteracao = value;
+					this.SendPropertyChanged("DataAlteracao");
+					this.OnDataAlteracaoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA", Storage="_TRANSFERENCIASCREDITO", ThisKey="TransacaoID", OtherKey="CreditoID")]
 		public EntitySet<TRANSFERENCIA> TRANSFERENCIASCREDITO
 		{
 			get
@@ -1729,7 +1873,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_TRANSFERENCIASDEBITO", ThisKey="TransacaoID", OtherKey="Debito")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TRANSACAO_TRANSFERENCIA1", Storage="_TRANSFERENCIASDEBITO", ThisKey="TransacaoID", OtherKey="DebitoID")]
 		public EntitySet<TRANSFERENCIA> TRANSFERENCIASDEBITO
 		{
 			get
@@ -1742,7 +1886,7 @@ namespace Plantae.Core
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_CATEGORIA", ThisKey="Categoria", OtherKey="CategoriaID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CATEGORIA_TRANSACAO", Storage="_CATEGORIA", ThisKey="CategoriaID", OtherKey="CategoriaID", IsForeignKey=true)]
 		public CATEGORIA CATEGORIA
 		{
 			get
@@ -1765,18 +1909,18 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.TRANSACOES.Add(this);
-						this._Categoria = value.CategoriaID;
+						this._CategoriaID = value.CategoriaID;
 					}
 					else
 					{
-						this._Categoria = default(long);
+						this._CategoriaID = default(long);
 					}
 					this.SendPropertyChanged("CATEGORIA");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_CONTA", ThisKey="Conta", OtherKey="ContaID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CONTA_TRANSACAO", Storage="_CONTA", ThisKey="ContaID", OtherKey="ContaID", IsForeignKey=true)]
 		public CONTA CONTA
 		{
 			get
@@ -1799,18 +1943,18 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.TRANSACOES.Add(this);
-						this._Conta = value.ContaID;
+						this._ContaID = value.ContaID;
 					}
 					else
 					{
-						this._Conta = default(long);
+						this._ContaID = default(long);
 					}
 					this.SendPropertyChanged("CONTA");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_JOURNAL", ThisKey="Journal", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="JOURNAL_TRANSACAO", Storage="_JOURNAL", ThisKey="JournalID", OtherKey="JournalID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public JOURNAL JOURNAL
 		{
 			get
@@ -1833,11 +1977,11 @@ namespace Plantae.Core
 					if ((value != null))
 					{
 						value.TRANSACOES.Add(this);
-						this._Journal = value.JournalID;
+						this._JournalID = value.JournalID;
 					}
 					else
 					{
-						this._Journal = default(long);
+						this._JournalID = default(long);
 					}
 					this.SendPropertyChanged("JOURNAL");
 				}
@@ -1867,25 +2011,25 @@ namespace Plantae.Core
 		private void attach_TRANSFERENCIASCREDITO(TRANSFERENCIA entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANSACAOCREDITO = this;
+			entity.CREDITO = this;
 		}
 		
 		private void detach_TRANSFERENCIASCREDITO(TRANSFERENCIA entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANSACAOCREDITO = null;
+			entity.CREDITO = null;
 		}
 		
 		private void attach_TRANSFERENCIASDEBITO(TRANSFERENCIA entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANSACAODEBITO = this;
+			entity.DEBITO = this;
 		}
 		
 		private void detach_TRANSFERENCIASDEBITO(TRANSFERENCIA entity)
 		{
 			this.SendPropertyChanging();
-			entity.TRANSACAODEBITO = null;
+			entity.DEBITO = null;
 		}
 	}
 }

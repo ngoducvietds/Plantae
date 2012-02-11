@@ -7,7 +7,7 @@ namespace Plantae.Core
 {
     public partial class TRANSACAO : IOwnable
     {
-        public TRANSACAO(CONTA conta, CATEGORIA categoria, string nome, DateTime data, decimal valor, string owner)
+        public TRANSACAO(CONTA conta, CATEGORIA categoria, string nome, DateTime data, decimal valor, string owner) : this()
         {
             CONTA = conta;
             CATEGORIA = categoria;

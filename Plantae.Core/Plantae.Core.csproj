@@ -67,8 +67,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\CategoriaRepository.cs" />
     <Compile Include="Repositories\ContaRepository.cs" />
     <Compile Include="Repositories\Disposable.cs" />
+    <Compile Include="Repositories\ICategoriaRepository.cs" />
     <Compile Include="Repositories\IContaRepository.cs" />
     <Compile Include="Repositories\IContextFactory.cs" />
     <Compile Include="Repositories\IJournalRepository.cs" />
@@ -82,10 +84,10 @@
     <Compile Include="Repositories\TransacaoRepository.cs" />
     <Compile Include="Repositories\TransferenciaRepository.cs" />
     <Compile Include="Services\JournalServices.cs" />
+    <Compile Include="Services\UserServices.cs" />
     <Compile Include="TRANSACAO.cs" />
     <Compile Include="TRANSFERENCIA.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config">
       <SubType>Designer</SubType>

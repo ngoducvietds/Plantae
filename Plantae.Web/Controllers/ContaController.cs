@@ -147,6 +147,11 @@ namespace Plantae.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         private ActionResult ContextDependentView(ContaModel model = null)
         {
             string actionName = ControllerContext.RouteData.GetRequiredString("action");
@@ -162,6 +167,10 @@ namespace Plantae.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<string> GetErrorsFromModelState()
         {
             return ModelState.SelectMany(x => x.Value.Errors

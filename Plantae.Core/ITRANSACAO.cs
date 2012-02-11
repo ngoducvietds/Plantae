@@ -14,5 +14,6 @@ namespace Plantae.Core
         string Nome { get; set; }
         DateTime Data { get; set; }
         decimal Valor { get; set; }
+        int NumParcela { get; set; }
     }
 }
