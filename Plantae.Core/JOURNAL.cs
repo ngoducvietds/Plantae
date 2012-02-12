@@ -36,7 +36,7 @@ namespace Plantae.Core
             Owner = owner;
             Periodicidade = periodicidade;
             ParcelaInicial = parcelaInicial;
-            ParcelaTotal = ParcelaTotal;
+            ParcelaTotal = parcelaTotal;
             TempoIndeterminado = tempoIndeterminado;
         }
 

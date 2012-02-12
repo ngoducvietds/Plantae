@@ -1,10 +1,4 @@
-﻿.plantae-contas-table
-{
-    width: 240px;
-    color: #F8F8FC;
-}
-
-.plantae-contas-table thead 
+﻿.plantae-table thead 
 {
     background-color: #222138;
     height: 40px;
@@ -12,27 +6,40 @@
     font-weight: lighter;
 }
 
-.plantae-contas-table thead a 
+.plantae-table thead a 
 {
     color: #F8F8FC;
+    font-weight: lighter;
 }
 
-.plantae-contas-table thead th
+.plantae-table thead th
 {
     padding: 6px;
     text-align: left;
 }
 
-.plantae-contas-table tbody
+.plantae-table tbody
 {
     width: 280px;
     font-size: 1em;
 }
 
-.plantae-contas-table tbody td
+.plantae-table tbody td
 {
     border-bottom: 1px solid #222138;
     border-bottom-color: #DBDBE8;
+}
+
+.plantae-contas-table
+{
+    width: 240px;
+    color: #F8F8FC;
+}
+
+.plantae-extrato-table
+{
+    width: 940px;
+    color: #F8F8FC;
 }
 
 .contas-saldo
@@ -43,4 +50,8 @@
 .saldo-positivo
 {
     color: #0099CC;
+}
+.saldo-negativo
+{
+    color: #CC0000;
 }

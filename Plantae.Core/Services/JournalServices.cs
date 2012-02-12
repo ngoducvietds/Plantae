@@ -101,7 +101,8 @@ namespace Plantae.Core.Services
                     Nome = journal.Nome,
                     Data = data,
                     Valor = journal.Valor,
-                    NumParcela = parcela
+                    NumParcela = parcela,
+                    Owner = journal.Owner
                 };
 
                 // Incrementa a data

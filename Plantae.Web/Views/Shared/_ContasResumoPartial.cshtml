@@ -1,4 +1,4 @@
-﻿<table class="plantae-contas-table">
+﻿<table class="plantae-table plantae-contas-table">
 <thead>
     <tr>
         <th>
@@ -17,7 +17,7 @@
                 <span>@Html.ActionLink(conta.Nome, "Edit", "Conta", routeValues: new { id = conta.ContaID }, htmlAttributes: new { @class = "ajax-link", id = "editarContaLink", data_dialog_title = "editar conta" })</span>
             </div>    
             <div>
-                <span class="contas-saldo saldo-positivo">R$ 2.548,33</span>
+                <span class="contas-saldo saldo-positivo">@conta.SaldoAtual</span>
             </div>
         </td>
     </tr>

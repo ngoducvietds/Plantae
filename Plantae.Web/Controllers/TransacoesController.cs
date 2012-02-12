@@ -7,6 +7,7 @@ using Plantae.Core;
 using Plantae.Core.Repositories;
 using Plantae.Web.Models;
 using Plantae.Core.Services;
+using Plantae.Web.Services;
 
 namespace Plantae.Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace Plantae.Web.Controllers
         CategoriaRepository categoriaRepository;
         JournalRepository journalRepository;
         TransacaoRepository transacaoRepository;
+        ExtratoServices extratoServices;
 
         public TransacoesController()
         {
@@ -24,6 +26,7 @@ namespace Plantae.Web.Controllers
             categoriaRepository = new CategoriaRepository(new ContextFactory());
             journalRepository = new JournalRepository(new ContextFactory());
             transacaoRepository = new TransacaoRepository(new ContextFactory());
+            extratoServices = new ExtratoServices();
         }
 
         //
@@ -31,7 +34,20 @@ namespace Plantae.Web.Controllers
 
         public ActionResult Index()
         {
+            // Recupera os dados de conta e período do extrato
+            CONTA selectedConta = null;
+            DateTime startDate = DateTime.Now.AddMonths(-1);
+            DateTime endDate = DateTime.Now;
+
+            // Cria o bag de contas
             ViewBag.Contas = contaRepository.GetAll(User.Identity.Name);
+
+            // Cria o bag de extratos
+            if(selectedConta != null)
+                ViewBag.Extrato = extratoServices.BuildExtratoCollection(transacaoRepository.GetByContaAndDate(selectedConta, startDate, endDate, User.Identity.Name), selectedConta.GetSaldoEm(startDate));
+            else
+                ViewBag.Extrato = extratoServices.BuildExtratoCollection(transacaoRepository.GetAll(User.Identity.Name), transacaoRepository.GetTotalTransacoesEm(startDate, User.Identity.Name));
+
 
             return View();
         }
@@ -54,7 +70,7 @@ namespace Plantae.Web.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            string tipo = Request["tipo"];
+            string tipo = Request.QueryString["tipo"];
 
             ViewBag.TipoTransacao = GetTipoTransacaoValue(tipo).ToString();
             ViewBag.ContasDebito = new SelectList(contaRepository.GetAll(User.Identity.Name), "ContaID", "Nome");
@@ -92,6 +108,8 @@ namespace Plantae.Web.Controllers
         [HttpPost]
         public JsonResult JsonCreate(JournalModel model)
         {
+            UpdateJournalModelProperties(model, ModelState);
+
             if (ModelState.IsValid)
             {
                 JOURNAL journal = new JOURNAL(model, User.Identity.Name);
@@ -155,6 +173,22 @@ namespace Plantae.Web.Controllers
             {
                 return View();
             }
+        }
+
+        private void UpdateJournalModelProperties(JournalModel model, ModelStateDictionary modelState)
+        {
+            if (model.CategoriaID != 0)
+                ModelState.Remove("Categoria");
+            else
+                ModelState.Remove("CategoriaID");
+
+            if (model.ContaCreditoID.HasValue)
+                model.CONTACREDITO = contaRepository.FindById(model.ContaCreditoID.Value, User.Identity.Name);
+            
+            if (model.ContaDebitoID.HasValue)
+                model.CONTADEBITO = contaRepository.FindById(model.ContaDebitoID.Value, User.Identity.Name);
+            
+            model.CATEGORIA = categoriaRepository.FindById(model.CategoriaID, User.Identity.Name);
         }
 
         private int GetTipoTransacaoValue(string tipo)

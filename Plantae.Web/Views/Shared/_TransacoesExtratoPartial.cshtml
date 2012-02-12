@@ -1,22 +1,25 @@
-﻿<table>
+﻿<table class="plantae-table plantae-extrato-table">
 <thead>
     <tr>
-        <th></th>
-        <th></th>
-        <th>Transações @Html.ActionLink("+ novo crédito", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo crédito" })</th>
-        <th>Transações @Html.ActionLink("- novo débito", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo débito" })</th>
-        <th>Transações @Html.ActionLink("<> nova transferência ", "Create", "Transacoes", routeValues: null, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "nova transferência" })</th>
+        <th colspan="5">
+            <span class="float-left">Transações</span>
+            <span class="float-right">
+                @Html.ActionLink("+ novo crédito", "Create", "Transacoes", routeValues: new { tipo = "credito" }, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo crédito" })
+                @Html.ActionLink("- novo débito", "Create", "Transacoes", routeValues: new { tipo = "debito" }, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "novo débito" })
+                @Html.ActionLink("<> nova transferência ", "Create", "Transacoes", routeValues: new { tipo = "transferencia" }, htmlAttributes: new { @class = "ajax-link", id = "novaTransacaoLink", data_dialog_title = "nova transferência" })
+            </span>
+        </th>
     </tr>
 </thead>
 <tbody>
-@foreach (Plantae.Core.CONTA conta in ViewBag.Contas)
+@foreach (Plantae.Web.Models.ExtratoModel transacao in ViewBag.Extrato)
 {
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>@transacao.Conta</td>
+        <td>@transacao.Data</td>
+        <td>@transacao.Categoria</td>
+        <td>@transacao.Valor</td>
+        <td>@transacao.Saldo</td>
     </tr>
 }
 </tbody>

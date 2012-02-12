@@ -7,6 +7,6 @@ namespace Plantae.Core.Repositories
 {
     public interface IContaRepository : IRepository<CONTA>
     {
-
+        
     }
 }

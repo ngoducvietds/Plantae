@@ -26,7 +26,7 @@ namespace Plantae.Core.Repositories
         {
             journalServices.GerarTransacoes(entity, DateTime.Now.Date);
 
-            InsertOnSubmit(entity);
+            base.InsertOnSubmit(entity);
         }
     }
 }

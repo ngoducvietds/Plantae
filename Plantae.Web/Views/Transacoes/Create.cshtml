@@ -13,6 +13,7 @@
             @Html.Hidden("TipoTransacao", (string)ViewBag.TipoTransacao)
         </div>
 
+        @if (ViewBag.TipoTransacao != "1") {
         <div class="editor-label">
             @Html.LabelFor(model => model.CONTADEBITO)
         </div>
@@ -20,7 +21,9 @@
             @Html.DropDownList("ContaDebitoID", ViewBag.ContasDebito as SelectList, "Escolha a conta de débito")
             @Html.ValidationMessageFor(model => model.CONTADEBITO)
         </div>
+        }
 
+        @if (ViewBag.TipoTransacao != "0") {
         <div class="editor-label">
             @Html.LabelFor(model => model.CONTACREDITO)
         </div>
@@ -28,12 +31,13 @@
             @Html.DropDownList("ContaCreditoID", ViewBag.ContasCredito as SelectList, "Escolha a conta de crédito")
             @Html.ValidationMessageFor(model => model.CONTACREDITO)
         </div>
+        }
 
         <div class="editor-label">
             @Html.LabelFor(model => model.CATEGORIA)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("CategoriaID", ViewBag.Categorias as SelectList, "Escolha a categoria")
+            @Html.DropDownList("CategoriaId", ViewBag.Categorias as SelectList, "Escolha a categoria")
             @Html.ValidationMessageFor(model => model.CATEGORIA)
         </div>
 

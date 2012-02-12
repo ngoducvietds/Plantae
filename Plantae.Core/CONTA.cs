@@ -34,6 +34,31 @@ namespace Plantae.Core
         /// <summary>
         /// 
         /// </summary>
+        public decimal SaldoAtual
+        {
+            get
+            {
+                return GetSaldoEm(DateTime.Now);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public decimal GetSaldoEm(DateTime data)
+        {
+            decimal saldo = 0;
+
+            saldo = this.TRANSACOES.Where(t => t.Data <= data && t.ContaID == this.ContaID).Sum(t => (decimal?)t.Valor) ?? 0.0M;
+
+            return saldo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="nome"></param>
         /// <param name="dataInicial"></param>
         /// <param name="saldoInicial"></param>
